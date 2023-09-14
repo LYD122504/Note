@@ -1,0 +1,40 @@
+:PROPERTIES:
+:ID:       8e5db3c0-2813-4676-b6a1-273bb922705f
+:ROAM_REFS: cite:gaoOptimalErrorEstimates2014
+:END:
+#+title: Optimal Error Estimates of a Linearized Backward Euler FEM for the Landau--Lifshitz Equation
+#+FILETAGS: reading research 
+ - tags ::  
+* Optimal Error Estimates of a Linearized Backward Euler FEM for the Landau--Lifshitz Equation
+:PROPERTIES:
+:Custom_ID: gaoOptimalErrorEstimates2014
+:URL: 
+:AUTHOR: Gao, H.
+:NOTER_DOCUMENT: C:/Users/Liyaoda/Nutstore/1/zotero/gaoOptimalErrorEstimates2014.pdf
+:NOTER_PAGE:
+:END:
+** Research Objectives
+Construct a fully discrete linearized scheme for LL equation and give an almost unconditionally error estimate for it.
+** Background and Problems
+In the last twenty years, mathematical analysis and numerical simulation of LL equation have been done.
+
+However, we should obey some strong restrictive step conditions in order to obtain the convergence estimate for LL equations.
+
+The greatest problem is the strong nonlinearities and coupling of the system.
+** Methods
+*** Time and Spatial
+Time direction: Linearized Backward Euler
+
+Spatial direction: FEM
+*** Highlight
+The author propose a new linearization to the nonlinear hyromagnetic term $\gamma m\times \Delta m$.
+
+The linearization is based on a linear treatment of the weak form of the nonlinear term by
+\begin{equation*}
+\gamma(m\times\Delta m,\phi)=-\gamma(\nabla m\times\nabla m,\nabla\phi)-\gamma(m\times\nabla m,\nabla\phi)\approx-\gamma(m_h^j\times\nabla m_h^{j+1},\nabla\phi)
+\end{equation*}
+
+It requires less computations to generate the stiffness matrix at each time step.
+** Thinks
+Maybe we can change the time discretation method.
+** Summary

@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       2d7a9534-45a8-4b8f-8beb-e53d9d279144
+:END:
+#+title:  discrete Gronwall's inequality  
+- tag :: 
+ #+DOWNLOADED: screenshot @ 2023-09-14 21:33:50
+ [[file:img/2023-09-14_21-33-50_screenshot.png]]

@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       85d28d4b-a3f9-4ac7-92e7-7839ac79de28
+:END:
+#+title: Inequality  
+- tag :: 
+[[id:01eac1e9-2ab9-4bcb-b002-4a3a28dc0d8f][Galiardo-Nirenberg inequality]]
+[[id:2d7a9534-45a8-4b8f-8beb-e53d9d279144][discrete Gronwall's inequality]]
+[[id:62289624-484e-4a61-89db-9113973b5fdb][Sobolev inequality]]
+ Inverse inequality

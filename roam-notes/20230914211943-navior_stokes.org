@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       dab4e23b-ae63-4a77-a951-a2a9717f1d9d
+:END:
+#+title: Navior-Stokes  
+- tag :: 
+ 

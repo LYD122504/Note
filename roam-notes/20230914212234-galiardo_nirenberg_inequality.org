@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       01eac1e9-2ab9-4bcb-b002-4a3a28dc0d8f
+:END:
+#+title:  Galiardo-Nirenberg inequality  
+- tag :: 
+ Let $u$ be a function defined on $\Omega$ and $\partial^su$ be any partial derivative of $u$ of order $s$, then
+ 
+\begin{equation*}
+\left\Vert \partial^ju\right\Vert_{L^p}\leq C \left\Vert \partial^mu\right\Vert_{L^r}^a \left\Vert u\right\Vert_{L^q}^{1-a}+C \left\Vert u\right\Vert_{L^{q}},
+\end{equation*}
+for $0\leq j<m$ and $\frac{j}{m}\leq a\leq 1$ with
+\begin{equation*}
+\frac{1}{p}=\frac{j}{d}+a \left( \frac{1}{r}-\frac{m}{d} \right)+(1-a)\frac{1}{q},
+\end{equation*}
+except $1<r<\infty$ and $m-j-\frac{d}{r}$ is a nonnegative integer, in which case the above estimate holds only for $\frac{j}{m}\leq a<1$
+
