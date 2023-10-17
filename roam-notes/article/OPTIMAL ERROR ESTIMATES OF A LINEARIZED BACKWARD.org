@@ -1,32 +1,30 @@
 :PROPERTIES:
-:ID:       8e5db3c0-2813-4676-b6a1-273bb922705f
-:ROAM_REFS: cite:gaoOptimalErrorEstimates2014
+:ID:       d30cf069-0ff3-4544-83e3-6fc450f0ed75
 :END:
-#+title: Optimal Error Estimates of a Linearized Backward Euler FEM for the Landau--Lifshitz Equation
-#+FILETAGS: reading research 
- - tags ::  
-* Optimal Error Estimates of a Linearized Backward Euler FEM for the Landau--Lifshitz Equation
-:PROPERTIES:
-:Custom_ID: gaoOptimalErrorEstimates2014
-:URL: 
-:AUTHOR: Gao, H.
-:NOTER_DOCUMENT: C:/Users/Liyaoda/Nutstore/1/zotero/gaoOptimalErrorEstimates2014.pdf
-:NOTER_PAGE:
-:END:
-** Research Objectives
+#+title:OPTIMAL ERROR ESTIMATES OF A LINEARIZED BACKWARD EULER FEM FOR THE LANDAU–LIFSHITZ EQUATION"
+#+FILETAGS: reading
+- tags :: 
+- sources :: "C:\Users\Liyaoda\Nutstore\1\zotero\gaoOptimalErrorEstimates2014.pdf"
+* Author
+Huadong Gao
+* Equation
+
+* Main aim
 Construct a fully discrete linearized scheme for LL equation and give an almost unconditionally error estimate for it.
-** Background and Problems
+* Background and Problems
 In the last twenty years, mathematical analysis and numerical simulation of LL equation have been done.
 
 However, we should obey some strong restrictive step conditions in order to obtain the convergence estimate for LL equations.
 
 The greatest problem is the strong nonlinearities and coupling of the system.
-** Methods
-*** Time and Spatial
+* Methods
+** Time and Spatial
 Time direction: Linearized Backward Euler
 
 Spatial direction: FEM
-*** Highlight
+** Thinks
+Maybe we can change the time discretation method.
+** Highlight
 The author propose a new linearization to the nonlinear hyromagnetic term $\gamma m\times \Delta m$.
 
 The linearization is based on a linear treatment of the weak form of the nonlinear term by
@@ -35,6 +33,5 @@ The linearization is based on a linear treatment of the weak form of the nonline
 \end{equation*}
 
 It requires less computations to generate the stiffness matrix at each time step.
-** Thinks
-Maybe we can change the time discretation method.
-** Summary
+*** Trick
+Temporal-spatial splitting method.

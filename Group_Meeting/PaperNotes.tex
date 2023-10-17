@@ -1,0 +1,330 @@
+\documentclass[UTF8,a4paper]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{ctex}
+
+\newtheorem{Theorem}{Thm}[section]
+\newtheorem{Lemma}{Lemma}[section]
+\newtheorem{Corollary}{Cor}[section]
+\newtheorem{Proposition}{Prop}[section]
+
+\title{Paper Notes}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Optimal error estimates of a linearized backward Euler FEM for the Landau-Lifshitz equation}
+考虑带交换场的 Landau-Lifshitz 方程如下所示
+\begin{equation*}
+\left\{\begin{aligned}
+\frac{\partial m}{\partial t}&=\gamma m\times\Delta m-\lambda m\times(m\times\Delta m) &&x\in\Omega,\ t\in(0,T]\\ 
+ m &=m_{0} &&x\in\Omega,\ \left| m_0 \right| =1\\ 
+ \frac{\partial m}{\partial\vec{n}} &=0 &&
+\end{aligned}\right.
+\end{equation*}
+同样, 我们可以考虑 Dirichlet 边界条件 $m=g$, 只需要要求边界条件的函数满足 $\left| g \right|=1$. 为了后续讨论方便, 我们在此仅考虑齐次 Neumann 边界条件. 针对上面的方程, 我们可以发现其显然满足守恒律,给出如下的证明过程.
+\begin{proof}
+  在方程两端同时点乘 $m$ 得
+\begin{equation*}
+m\cdot m_t=\gamma m\cdot(m\times\Delta m)-\lambda m\cdot ( m\times( m\times \Delta m))
+\end{equation*}
+由混合积的性质得, $m\cdot \left( m\times \Delta m\right)=\Delta m\cdot ( m\times  m)=0,\  m\cdot ( m\times ( m\times \Delta m))=( m\times\Delta m)\cdot ( m\times m)$
+
+因此有 $\frac{1}{2}\frac{\mathrm{d}}{\mathrm{d}t}\left| m \right|^2=m\cdot m_t=0$, 也就是说 $\left| m \right|^2$ 是一个常数.
+\end{proof}
+
+为了后续讨论方便, 我们先对 LL 方程做一个变形, 变形过程主要依赖于守恒律以及 $A\times \left( B\times C\right)=B \left( A\cdot C\right)-C \left( A\cdot B\right)$. 我们分析 $m\times ( m\times \Delta m)$ 这一项, 其变形过程如下所示,
+\begin{equation*}
+m\times( m\times \Delta m)=m(m\cdot\Delta m)-\Delta m(m\cdot m)=m(\nabla(m\cdot\nabla m)-\left| \nabla m \right|^2)-\Delta m
+\end{equation*}
+而此时由于 $m\cdot\nabla m=\frac{1}{2}\nabla\left|  m\right|^2=0$, 所以上式等价于 $m\times( m\times \Delta m)=-\left| \nabla m \right|^2m-\Delta m$
+
+那么 LL 方程就可以改写成如下形式
+\begin{equation*}
+m_t-\gamma m\times \Delta m-\lambda\Delta m=\lambda \left| \nabla m \right|^2m,\ \left| m \right|=1
+\end{equation*}
+本文得创新点在于提出了对于 $\gamma m\times\Delta m$ 的线性化处理技巧, 每一步计算刚度矩阵可以减少计算量
+\begin{equation*}
+\gamma(m\times \Delta m,\phi)=-\gamma(\nabla m\times\nabla m,\phi)-\gamma(m\times\nabla m,\nabla\phi)\approx-\gamma(m_h^j\times \nabla m_h^{j+1},\nabla\phi)
+\end{equation*}
+现在给出一些记号, 记 $\{t_j\}_{j=0}^J$ 为时间划分, $t_j=j\tau,\ \tau=T/J$ 且 $m^j=m(\cdot,t_j),\ D_{\tau}f^{j+1}=\frac{f^{j+1}-f^j}{\tau},\ j=0,\dots,J-1$. 同时我们给出一个向量叉乘的计算公式, 若 $f=(f_1,f_2,f_3),\ g=(g_1,g_2,g_3)$, 则
+\begin{equation*}
+\nabla f\times\nabla g=
+\begin{pmatrix}
+  \nabla f_2\cdot\nabla g_3-\nabla f_3\cdot\nabla g_2\\
+  \nabla f_3\cdot\nabla g_1-\nabla f_1\cdot\nabla g_3\\
+  \nabla f_1\cdot\nabla g_2-\nabla f_2\cdot\nabla g_{1}
+\end{pmatrix}
+\end{equation*}
+在忽略数值离散条件下,我们得到有限元格式为
+\begin{equation*}
+(m_t,\phi)+\lambda(\nabla m,\nabla\phi)+\gamma(m\times\nabla m,\nabla\phi)=\lambda(\left| \nabla m \right|^2m,\phi),\ \forall\phi\in H^1(\Omega).
+\end{equation*}
+在上式引入线性化向后 Euler 格式就可以得到
+\begin{equation*}
+(D_{\tau}m_h^{j+1},\phi)+\lambda(\nabla m_h^{j+1},\nabla\phi)+\gamma(m_h^j\times\nabla m_h^{j+1},\nabla\phi)=\lambda(\left| \nabla m \right|^2m,\phi),\ m_h^0=\Pi_hm^{0}
+\end{equation*}
+上式则是相当于下面方程的有限元逼近,
+\begin{equation*}
+D_{\tau}m_h^{j+1}-\lambda\Delta m^{j+1}-\gamma m^j\times\Delta m^{j+1}-\gamma \nabla m^j\times\nabla m^{j+1}=\lambda \left| \nabla m^j \right|^2m^j
+\end{equation*}
+为了引出后续的误差分析, 我们先给出相应的正则性条件,
+\begin{align*}
+&\alpha>0,2D\ case\\
+  &\left\Vert m\right\Vert_{L^{\infty}(0,T;W^{2,2+\alpha})}+\left\Vert m_t\right\Vert_{L^2(0,T;H^2)}+\left\Vert m_t\right\Vert_{L^{\infty}(0,T;H^1)}+\left\Vert m_{tt}\right\Vert_{L^2(0,T;L^2)}\leq K,\\
+&3D\ case\\
+  &\left\Vert m\right\Vert_{L^{\infty}(0,T;W^{2,4})}+\left\Vert m_t\right\Vert_{L^2(0,T;H^2)}+\left\Vert m_t\right\Vert_{L^{\infty}(0,T;H^1)}+\left\Vert m_{tt}\right\Vert_{L^2(0,T;L^2)}\leq K,\\
+\end{align*}
+为了后续讨论简单, 我们仅考虑计算区域是三维的情况.下面我们给出收敛性定理,
+\begin{Theorem}
+  Let $T>0$ be a given constant and suppose that the LL equation has a unique solution $m:(0,T)\times\Omega\to \mathbb{R}^3$ satisfying the regularity conditions. Then the finite element system admits a unique solution $m_h^{j+1}$. If a quasi-uniform partition with mesh size $h$ and a uniform time step $\tau$ are used, then there exist two positive constants $\tau_0$ and $h_0$ such that when $\tau\leq\tau_0$ and $h\leq h_0$,
+\begin{equation*}
+\max_{0\leq j\leq J}\left\Vert m_h^j-m^j\right\Vert_{L^2}\leq C_0(\tau+h^2)
+\end{equation*}
+and
+\begin{equation*}
+\max_{0\leq j\leq J}\left\Vert m_h^j-m^j\right\Vert_{H^1}\leq C_0(\tau+h)
+\end{equation*}
+where $C_0$ is a positive constant which only depends on physical parameters $T$, $\Omega$, $m_0$, $\gamma$ and $\lambda$.
+\end{Theorem}
+有限元解不一定满足守恒律, 但是我们可以给出其与守恒之间的误差关系.
+\begin{Corollary}
+  Under the conditon of the Theorem, the finite element solution $\{m_h^j\}_{j=0}^J$ satisfies 
+\begin{equation*}
+\max_{0\leq j\leq J}\left\Vert 1-\left| m_h^j \right|^{2}\right\Vert_{L^2}\leq \hat{C}_0(\tau+h^{2})
+\end{equation*}
+where $C_0$ is a positive constant which only depends on physical parameters.
+\end{Corollary}
+\begin{proof}
+  根据前面的分析我们知道真解是满足守恒律的, 也就是说 $\left| m^j \right|^2=1$ 成立, 则
+\begin{equation*}
+\begin{aligned}
+\left\Vert 1-\left| m_h^j \right|^2\right\Vert & =\left\Vert \left| m^j \right|^2-\left| m_h^j \right| ^{2}\right\Vert&&\\ 
+  & =\left\Vert (m^j+m_h^j)\cdot(m^j-m_h^j)\right\Vert&&\\
+  & \leq \left\Vert m^j+m_h^j\right\Vert_{L^{\infty}}\left\Vert m^j-m_h^j\right\Vert _{L^2}&&\\
+  & \leq C\left\Vert m^j-m_h^j\right\Vert _{L^2}\leq C(\tau+h^2)&&
+\end{aligned}
+\end{equation*}
+\end{proof}
+本文后续将会采用时空分裂的技巧证明. 因此我们需要考虑时间半离散格式, 假设 $M^{j+1}$ 是时间半离散格式的解, 那时间半离散格式可以写成
+\begin{equation*}
+\begin{aligned}
+&D_{\tau}M^{j+1}-\lambda\Delta M^{j+1}-\gamma M^j\times\Delta M^{j+1}-\gamma \nabla M^j\times\nabla M^{j+1}=\lambda \left| \nabla M^j \right| ^2M^j& &&\\ 
+&(D_{\tau}M^{j+1},\phi)+\lambda(\nabla M^{j+1},\nabla\phi)+\gamma(M^j\times\nabla M^{j+1},\nabla\phi)=\lambda(\left| \nabla M^j \right|^2M^j,\phi)& &&
+\end{aligned}
+\end{equation*}
+误差就可以分裂成 
+\begin{equation*}
+\left\Vert m_h^j-m^j\right\Vert\leq \left\Vert e^j\right\Vert+\left\Vert \theta_h^j\right\Vert+\left\Vert e_h^j\right\Vert
+\end{equation*}
+其中
+\begin{equation*}
+e^j=M^j-m^j\text{(时间)},\ \theta_h^j=R_h^jM^j-M^j\text{(投影)},\ e_h^j=m_h^j-R_h^jM^j\text{(空间)}
+\end{equation*}
+在后续证明之前, 我们先给出两个重要的引理
+\begin{Lemma}[Gagliardo-Nirenberg inequality]
+  Let $u$ be a function defined on $\Omega$ and $\partial^su$ be any partial derivative of $u$ of order $s$, then
+\begin{equation*}
+\left\Vert \partial^ju\right\Vert_{L^p}\leq C \left\Vert \partial^mu\right\Vert_{L^r}^a \left\Vert u\right\Vert_{L^q}^{1-a}+C \left\Vert u\right\Vert_{L^q}
+\end{equation*}
+for $0\leq j<m$ and $\frac{j}{m}\leq a\leq1$ with 
+\begin{equation*}
+\frac{1}{p}=\frac{j}{d}+a \left( \frac{1}{r}-\frac{m}{d}\right)+(1-a)\frac{1}{q}
+\end{equation*}
+except $1<r<\infty$ and $m-j-\frac{d}{r}$ is a nonnegative integer, in which case the above estimate holds only for $\frac{j}{m}\leq a<1$
+\end{Lemma}
+\begin{Lemma}[discrete Gronwall's inequality]
+  Let $\tau,\ B$ and $a_k,\ b_k,\ c_k,\ \gamma_k$ for integer $k\geq0$, be nonnegative numbers such that 
+\begin{equation*}
+a_n+\tau\sum_{k=0}^nb_k\leq\tau\sum_{k=0}^n\gamma_ka_k+\tau\sum_{k=0}^nc_k+B,\ n\geq0
+\end{equation*}
+Suppose that $\tau\gamma_k<1$, for all $k$, and set $\sigma_k=(1-\tau\gamma_k)^{-1}$. Then 
+\begin{equation*}
+a_n+\tau\sum_{k=0}^nb_k\leq\exp \left( \tau\sum_{k=0}^n\gamma_k\sigma_k\right)\left( \tau\sum_{k=0}^nc_k+B\right),\ n\geq0
+\end{equation*}
+\end{Lemma}
+\subsection{Temporal error estimates}
+\begin{Theorem}
+  Let $T>0$ be a given constant and suppose that the LL equation has a unique solution $m:(0,T)\times\Omega\to \mathbb{R}^3$ satisfying the regularity conditions. Then the temporal semi-discrete elliptic system with homogeneous Neumann boundary condition admits a unique solution $M^{j+1}$ such that when $\tau\leq\tau_1$ for some $\tau_1>0$, 
+\begin{equation*}
+\max_{0\leq j\leq J}\left\Vert M^j\right\Vert_{W^{2,4}}+\max_{0\leq j\leq J}\left\Vert D_{\tau}M^j\right\Vert_{H^1}+\tau\sum_{j=1}^J \left\Vert D_{\tau}M^j\right\Vert_{H^2}^2\leq C
+\end{equation*}
+and
+\begin{equation*}
+\max_{0\leq j\leq J}\left( \left\Vert e^j\right\Vert_{H^1}^2+\tau\sum_{n=0}^j \left\Vert e^n\right\Vert _{H^2}^2\right)\leq \frac{C_0^2}{16}\tau^2
+\end{equation*}
+\end{Theorem}
+\begin{proof}
+  我们可以将时间半离散方程写成如下形式
+\begin{equation*}
+M^{j+1}-\tau\lambda\Delta M^{j+1}-\tau\gamma M^j\times\Delta M^{j+1}-\tau\gamma\nabla M^j\times\nabla M^{j+1}=M^j+\tau\lambda \left| \nabla M^j \right|^2M^j
+\end{equation*}
+为了说明该方程有解, 由于其关于 $M^{j+1}$ 是线性的, 我们可以对其左边与 $M^{j+1}$ 做内积得到
+\begin{align*}
+  &\ (M^{j+1}-\tau\lambda\Delta M^{j+1}-\tau\gamma M^j\times \Delta M^{j+1}-\tau\gamma\nabla M^j\times\nabla M^{j+1},M^{j+1})\\
+  &=(M^{j+1},M^{j+1})+\tau\lambda(\nabla M^{j+1},\nabla M^{j+1})\\
+  &\geq\min(1,\tau\lambda)\left\Vert M^{j+1}\right\Vert_{H^1}
+\end{align*}
+其中用到了
+\begin{align*}
+  &\ (M^j\times \Delta M^{j+1},M^{j+1})+(\nabla M^j\times\nabla M^{j+1},M^{j+1})\\
+  &=(\nabla(M^j\times\nabla M^{j+1}),M^{j+1})\\
+  &=-(M^j\times\nabla M^{j+1},\nabla M^{j+1})=0
+\end{align*}
+因此根据 Lax-Milgram 定理得知其存在唯一解.
+
+下面我们利用数学归纳法来给出相应的误差证明, 由于 $e^0=0$, 因此误差估计在 $j=0$ 时显然成立, 因此我们假设误差估计在 $0\leq j\leq k-1$ 时成立, 下面我们只需要证明其在 $0\leq j\leq k$ 时成立.
+
+为此我们利用 LL 方程与时间半离散格式作差即可得到误差方程,其需要涉及的变形过程如下,
+\begin{align*}
+  &M^j\times\Delta M^{j+1}+\nabla M^j\times \nabla M^{j+1}-m^{j+1}\times\Delta m^{j+1}-\nabla m^{j+1}\times\nabla m^{j+1}\\
+  &= M^j\times\Delta M^{j+1}+\nabla M^j\times\nabla M^{j+1}-m^j\times\Delta m^{j+1}-\nabla m^j\times\nabla m^{j+1}\\
+  &-(m^{j+1}-m^j)\times \Delta m^{j+1}-\nabla(m^{j+1}-m^j)\times\nabla m^{j+1}\\
+  &=\nabla(M^j\times\nabla M^{j+1})-\nabla(m^j\times\nabla m^{j+1})=\nabla(M^j\times\nabla M^{j+1}-m^j\times\nabla m^{j+1})\\
+  &=\nabla \left( M^j\times\nabla M^{j+1}-M^j\times\nabla m^{j+1}+M^j\times\nabla m^{j+1}-m^j\times\nabla m^{j+1}\right)\\
+  &=\nabla M^j\times\nabla e^{j+1}+M^j\times\Delta e^{j+1}+\nabla e^{j}\times\nabla m^{j+1}+e^j\times\Delta m^{j+1}
+\end{align*}
+上式过程, 我们其实只推了其中几项的化简, 未讨论的部分我们将会将其归入截断误差, 因此无需考虑. 同样, 我们可以通过增减项来得到
+\begin{equation*}
+\left| \nabla M^j \right|^2\!M^j-\left| \nabla m^{j+1} \right|^2\!m^{j+1}\!=\!\left| \nabla M^j \right|^2\!M^j-\left| \nabla m^j \right|^2\!m^j+\left| \nabla m^j \right|^2m^j-\left| \nabla m^{j+1} \right|^2\!m^{j+1}
+\end{equation*}
+误差方程具体形式如下
+\begin{align*}
+  D_{\tau}e^{j+1}-\lambda\Delta e^{j+1}&=\gamma M^j\times\Delta e^{j+1}+\gamma e^j\times\Delta m^{j+1}+\gamma\nabla M^j\times\nabla e^{j+1}\\
+&+\gamma\nabla e^j\times\nabla m^{j+1}-\lambda(\left| \nabla m^j \right|^2m^j-\left| \nabla M^j \right| ^2M^j)-R_{tr}^{j+1}
+\end{align*}
+其中截断误差为
+\begin{align*}
+  R_{tr}^{j+1}&=D_{\tau}m^{j+1}-\frac{\partial m(\cdot,t_{j+1})}{\partial t}+\gamma(m^{j+1}-m^j)\times\Delta m^{j+1}\\
+&+\gamma\nabla(m^{j+1}-m^j)\times\nabla m^{j+1}+\lambda(\left| \nabla m^{j+1} \right|^{2 }m^{j+1}-\left| \nabla m^j \right| ^2m^j)
+\end{align*}
+利用前文我们给出的正则性条件, 我们可以得到如下结果
+\begin{equation*}
+\tau\sum_{j=0}^{J-1}\left\Vert R_{tr}^{j+1}\right\Vert_{L^2}^2\leq C\tau^2
+\end{equation*}
+由于
+\begin{equation*}
+(D_{\tau}e^{j+1},e^{j+1})=\frac{1}{\tau}\left[ \left\Vert e^{j+1}\right\Vert ^2-(e^j,e^{j+1})\right]\geq \frac{1}{2}D_{\tau}\left\Vert e^{j+1}\right\Vert^2
+\end{equation*}
+和
+\begin{equation*}
+\gamma(M^j\times\Delta e^{j+1},e^{j+1})+\gamma(\nabla M^j\times\nabla e^{j+1},e^{j+1})=\gamma(\nabla(M^j\times\nabla e^{j+1}),e^{j+1})=0
+\end{equation*}
+, 因此我们对方程两边分别与 $e^{j+1},\ -\Delta e^{j+1}$ 做内积得到,
+\begin{align*}
+  & \quad \frac{1}{2}D_{\tau}\left\Vert e^{j+1}\right\Vert^2+\lambda \left\Vert \nabla e^{j+1}\right\Vert^2\\
+  &\leq \gamma(e^j\times\Delta m^j,e^{j+1})+\gamma(\nabla e^j\times\nabla m^{j+1},e^{j+1})\\
+                                                                     &+\lambda(\left| \nabla m^j \right|^2m^j-\left| \nabla M^j\right| ^2M^j,e^{j+1})-(R_{tr}^{j+1},e^{j+1})\\
+ &:=\sum_{n=1}^4I^n(e^{j+1})
+\end{align*}
+同理, 我们可以得到
+\begin{align*}
+  &\quad \frac{1}{2}D_{\tau}\!\left( \left\Vert \nabla e^{j+1}\right\Vert^2 \right)+\lambda \left\Vert \Delta e^{j+1}\right\Vert^2\\
+  &\leq-\gamma(e^j\!\times\!\Delta m^{j+1},\Delta e^{j+1})-\gamma(\nabla M^j\!\times\!\nabla e^{j+1},\Delta e^{j+1})\\
+                                                                                        &-\gamma(\nabla e^j\times\nabla m^{j+1},\Delta e^{j+1})+(R_{tr}^{j+1},\Delta e^{j+1})\\
+  &-\lambda(\left| \nabla m^j\right| ^jm^j-\left| \nabla M^j \right|^2M^j,\Delta e^{j+1}):=\sum_{n=5}^9I^n(e^{j+1})
+\end{align*}
+接下来我们要对 $I^n(e^{j+1}),\ n=1,\dots,9$ 一项项进行分析. 我们先罗列一下一些较为显然的估计如下,
+\begin{align*}
+  \left| I^1 \right|&\leq C \left\Vert e^{j+1}\times\Delta m^{j+1}\right\Vert_{L^2}\cdot \left\Vert e^j\right\Vert_{L^2}\\
+                    &\leq C \left\Vert e^{j+1}\right\Vert_{L^6} \left\Vert \Delta m^{j+1}\right\Vert_{L^3}\left\Vert e^j\right\Vert_{L^2}\\
+                    &\leq \epsilon \left\Vert e^{j+1}\right\Vert_{H^1}^2+\epsilon^{-1}C \left\Vert e^j\right\Vert_{L^2}^{2}\\
+  \left| I^2 \right|&\leq \epsilon \left\Vert e^j\right\Vert_{H^1}^2+\epsilon C \left\Vert e^{j+1}\right\Vert_{L^2}^2\\
+  \left| I^4 \right|&\leq C \left\Vert e^{j+1}\right\Vert_{L^2}^2+C \left\Vert R_{tr}^{j+1}\right\Vert_{L^2}^2\\
+  \end{align*}
+\begin{align*}
+  \left| I^5 \right|&\leq\epsilon \left\Vert \Delta e^{j+1}\right\Vert_{L^2}^{2}+\epsilon^{-1}C \left\Vert e^j\right\Vert_{H^1}^2\\
+  \left| I^7 \right|&\leq \epsilon \left\Vert \Delta e^{j+1}\right\Vert_{L^2}^2+\epsilon^{-1}C \left\Vert e^{j+1}\right\Vert_{H^1}^2\\
+  \left| I^9 \right|&\leq \epsilon \left\Vert \Delta e^{j+1}\right\Vert_{L^2}^2+\epsilon^{-1}C \left\Vert R_{tr}^{j+1}\right\Vert_{L^2}^2
+\end{align*}
+分析 $\left| I^3 \right|$ 的估计,
+\begin{align*}
+  \left| I^3 \right|&=\left| \left( \lambda(\left| \nabla m^j \right|^2m^j-\left| \nabla M^j \right|^2M^j),e^{j+1}\right) \right|\\
+  &\leq C \left\Vert\left| \nabla m^j \right|^2m^j-\left| \nabla M^j \right|^2M^j \right\Vert \left\Vert e^{j+1}\right\Vert
+\end{align*}
+{\small
+\begin{align*}
+  &\quad\left\Vert\left| \nabla m^j \right|^2m^j-\left| \nabla M^j \right|^2M^j \right\Vert\\
+  &=\left\Vert\left| \nabla m^j \right|^2m^j-\left| \nabla m^j \right|^2M^j+\left| \nabla m^j \right|^2M^j-\left| \nabla M^j \right|^2M^j \right\Vert\\
+  &=\left\Vert \left| \nabla m^j \right|^2e^j+(\nabla m^j+\nabla M^j)\cdot\nabla e^j M^j \right\Vert\\
+  &=\left\Vert \left| \nabla m^j \right|^2e^j+(\nabla m^j\cdot\nabla e^j) M^j+(\nabla M^j\cdot\nabla e^j) M^j \right\Vert\\
+  &=\left\Vert\left| \nabla m^j \right|^2\!e^j\!+(\nabla m^j\cdot\nabla e^j)\! M^j\!+(\nabla M^j\cdot\nabla e^j)\! M^j\!-(\nabla M^j\cdot\nabla e^j)\!m^j\!+(\nabla M^j\cdot\nabla e^j)\!m^j\right.\\
+  &\left.-(\nabla m^j\cdot\nabla e^j)M^j+(\nabla m^j\cdot\nabla e^j)M^j+(\nabla m^j\cdot\nabla e^j)M^j-(\nabla m^j\cdot\nabla e^j)M^j\right\Vert\\
+  &=\left\Vert \left| \nabla m^j \right|^2\!e^j+\left| \nabla e^j \right| ^2\!e^j+2(\nabla m^j\cdot\nabla e^j)M^j+(\nabla M^j\cdot\nabla e^j)m^j-(\nabla m^j\cdot\nabla e^j)m^j\right\Vert\\
+  &=\left\Vert \left| \nabla m^j \right|^2\!e^j+\left|\nabla e^j \right| ^2\!e^j+2(\nabla m^j\cdot\nabla e^j)e^j+(\nabla M^j\cdot\nabla e^j)m^j+(\nabla m^j\cdot\nabla e^j)m^j\right\Vert\\
+  &=\left\Vert \left| \nabla m^j \right|^2\!e^j+\left|\nabla e^j \right| ^2\!e^j+2(\nabla m^j\cdot\nabla e^j)e^j+\left| \nabla e^j \right|^2m^j+2(\nabla m^j\cdot\nabla e^j)m^j\right\Vert
+\end{align*}
+}
+{\small
+\begin{align*}
+  \left| I^3 \right|&\leq C \left\Vert\left| \nabla m^j \right|^2m^j-\left| \nabla M^j \right|^2M^j \right\Vert \left\Vert e^{j+1}\right\Vert\\
+                    &\leq\epsilon^{-1}C \left(\left\Vert \left| \nabla m^j \right|^2\!e^j\right\Vert^{2}+\left\Vert\left|\nabla e^j \right| ^2\!e^j\right\Vert^2+\left\Vert2(\nabla m^j\cdot\nabla e^j)e^j\right\Vert+\left\Vert\left| \nabla e^j \right|^2m^j\right\Vert^2\right.\\
+                    &\left.+\left\Vert2(\nabla m^j\cdot\nabla e^j)m^j\right\Vert^2 \right)+\epsilon \left\Vert e^{j+1}\right\Vert^2\\
+                    &\leq \epsilon^{-1}C \left( \left\Vert e^j\right\Vert^2+\left\Vert e^j\right\Vert_{L^{\infty}}^2 \left\Vert \nabla e^j\right\Vert_{L^6}^2 \left\Vert \nabla e^j\right\Vert _{L^3}^2+2 \left\Vert \nabla e^j\right\Vert _{L^6}^2 \left\Vert e^j\right\Vert _{L^6}^2+\left\Vert \nabla e^j\right\Vert _{L^6}^2 \left\Vert\nabla e^j\right\Vert _{L^6}^2\right.\\
+                    &\left.+\left\Vert e^j\right\Vert_{H^1}^2\right)+\epsilon \left\Vert e^{j+1}\right\Vert^2
+ \end{align*}
+}
+我们给出一些不等式对上式进行化简,
+\begin{align*}
+    \left\Vert \nabla e^j\right\Vert_{L^6}&\leq \left\Vert\nabla e^j\right\Vert_{H^1}\leq \left\Vert e^j\right\Vert_{H^2}\\
+  \left\Vert e^j\right\Vert_{L^3}&\leq C \left( \left\Vert e^j\right\Vert_{L^2} \left\Vert e^j\right\Vert _{L^6}\right)^{\frac{1}{2}}
+                           \leq C \left( \left\Vert e^j\right\Vert_{L^2} \left\Vert e^j\right\Vert _{H^1}\right)^{\frac{1}{2}}\leq C \left( \left\Vert e^j\right\Vert_{H^2} \left\Vert e^j\right\Vert _{H^1}\right)^{\frac{1}{2}}\\
+ \left\Vert\nabla e^j\right\Vert_{L^3}&\leq C \left( \left\Vert\nabla e^j\right\Vert_{L^2} \left\Vert\nabla e^j\right\Vert _{L^6}\right)^{\frac{1}{2}}
+                          \leq C \left( \left\Vert e^j\right\Vert_{H^1} \left\Vert e^j\right\Vert _{H^2}\right)^{\frac{1}{2}}
+\end{align*}
+因此上式可以改为
+\begin{align*}
+  \left| I^3 \right|&\leq\epsilon \left\Vert e^{j+1}\right\Vert^2+\epsilon^{-1}C \left( \left\Vert e^j\right\Vert^2+\left\Vert e^j\right\Vert_{H^1}^2+\frac{C_0^2}{16}\tau^{\frac{3}{2}}\left\Vert e^j\right\Vert_{H^2}^2 \right)\\
+ & \leq\epsilon \left\Vert e^{j+1}\right\Vert^2+\epsilon^{-1}C \left\Vert e^j\right\Vert_{H^1}^{2}+\epsilon\left\Vert e^j\right\Vert_{H^2}^2 
+\end{align*}
+上面引入 $\frac{C_0}{16}\tau^{\frac{3}{2}}$ 的原因,
+\begin{equation*}
+\left\Vert \nabla e^j\right\Vert_{L^6}^2 \left\Vert \nabla e^j\right\Vert_{L^3}^2\leq C \left( \left\Vert e^j\right\Vert_{H^1}\left\Vert e^j\right\Vert _{H^2}\right)\left\Vert e^j\right\Vert_{H^2}^2
+\end{equation*}
+而此处的 $j$ 满足 $j\in[0,k-1]$, 因此有下式成立,
+\begin{align*}
+  \left\Vert e^j\right\Vert_{H^1}\left\Vert e^j\right\Vert _{H^2}\tau^{\frac{1}{2}}&\leq \frac{1}{2}( \left\Vert e^j\right\Vert_{H^1}^2+\tau\left\Vert e^j\right\Vert _{H^2}^2)\\
+                                                                &\leq \frac{1}{2}\max \left( \left\Vert e^j\right\Vert_{H^1}^2+\tau\sum_{n=0}^j\left\Vert e^n\right\Vert _{H^2}^2\right)\\
+  &\leq \frac{C_0^2}{32}\tau^2
+\end{align*}
+故
+\begin{equation*}
+\left\Vert e^j\right\Vert_{H^1}\left\Vert e^j\right\Vert _{H^2}\tau^{\frac{1}{2}}\leq \frac{C_0^2}{16}\tau^{\frac{3}{2}}C
+\end{equation*}
+所以对 $\left| I^3 \right|$ 的估计, 其实暗含了对 $\epsilon$ 的限制,
+\begin{equation*}
+\epsilon^{-1}C \frac{C_0^2}{16}\tau^{\frac{3}{2}}\leq\epsilon\Rightarrow\epsilon\geq \frac{\sqrt{C}C_0}{4}\tau^{\frac{3}{4}}
+\end{equation*}
+按照同样的证明过程,我们可以得到,
+\begin{equation*}
+\left| I^8 \right|\leq2\epsilon \left\Vert e^j\right\Vert_{H^2}^2+\epsilon^{-1}C \left\Vert e^j\right\Vert_{H^1}^2
+\end{equation*}
+下面给出 $\left| I^6 \right|$ 的估计,
+\begin{align*}
+  \left| I^6 \right|&=\left| C \left( \nabla M^j\times\nabla e^{j+1},\Delta e^{j+1}\right) \right|\\
+                    &=\left| C \left( \nabla e^j\times\nabla e^{j+1},\Delta e^{j+1}\right)+ C \left( \nabla m^j\times\nabla e^{j+1},\Delta e^{j+1}\right) \right|\\
+                    &\leq C\left| \left( \nabla e^j\times\nabla e^{j+1},\Delta e^{j+1}\right)\right|+ C\left| \left( \nabla m^j\times\nabla e^{j+1},\Delta e^{j+1}\right) \right|\\
+                    &\leq C \left\Vert \nabla e^j\right\Vert_{L^3}\left\Vert \nabla e^{j+1}\right\Vert_{L^6}\left\Vert \Delta e^{j+1}\right\Vert_{L^2}+C \left\Vert m^j\right\Vert_{W^{1,\infty}}\left\Vert \nabla e^{j+1}\right\Vert_{L^2}\left\Vert \Delta e^{j+1}\right\Vert_{L^2}\\
+                    &\leq C\left( \left\Vert e^j\right\Vert_{H^1}\left\Vert e^j\right\Vert _{H^2}\right)^{\frac{1}{2}}\left\Vert \Delta e^{j+1}\right\Vert_{L^2}^2+\epsilon \left\Vert e^{j+1}\right\Vert_{H^2}^2+\epsilon^{-1}C \left\Vert e^{j+1}\right\Vert_{H^1}^2\\
+                    &\le \frac{C C_0}{4}\tau^{\frac{3}{4}}\left\Vert \Delta e^{j+1}\right\Vert_{L^2}^2+\epsilon \left\Vert e^{j+1}\right\Vert_{H^2}^2+\epsilon^{-1}C \left\Vert e^{j+1}\right\Vert_{H^1}^2\\
+  &\leq 2\epsilon \left\Vert e^{j+1}\right\Vert_{H^2}^2+\epsilon^{-1}C \left\Vert e^{j+1}\right\Vert_{H^1}^2
+\end{align*}
+同样我们要求 $\epsilon\geq \frac{CC_0}{4}\tau^{\frac{3}{4}}$. 依托上面的逐项分析, 我们将不等式求和可以得到如下形式
+\begin{align*}
+  D_{\tau}\left( \left\Vert e^{j+1}\right\Vert_{H^1}^2\right)+\lambda \left\Vert e^{j+1}\right\Vert_{H^2}^2&\leq\epsilon \left\Vert e^j\right\Vert_{H^2}^2+\epsilon \left\Vert e^{j+1}\right\Vert_{H^2}^2+\varepsilon^{-1}C \left\Vert e^j\right\Vert_{H^1}^2\\
+                                                                                  &+\varepsilon^{-1}C \left\Vert e^{j+1}\right\Vert_{H^1}^2+\epsilon^{-1}C \left\Vert R_{tr}\right\Vert_{L^2}^2
+\end{align*}
+依据 Grownwall 不等式可以得到
+\begin{equation*}
+\left\Vert e^{j+1}\right\Vert_{H^1}^2+\tau\sum_{n=0}^{j+1}\left\Vert e^n\right\Vert_{H^2}^2\leq \exp(2TC)\tau^2
+\end{equation*}
+从误差不等式中我们可以得到
+\begin{equation*}
+\max_{0\leq j\leq J}
+\end{equation*}
+
+\end{proof}
+\end{document}

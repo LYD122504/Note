@@ -4,4 +4,4 @@
 #+title: Magnetic  
 - tag :: [[id:d6da447d-c1ec-4d55-9bc9-347b4b4bd4c8][Research article]]
 Gao 2014
- [[id:8e5db3c0-2813-4676-b6a1-273bb922705f][Optimal Error Estimates of a Linearized Backward Euler FEM for the Landau--Lifshitz Equation]]
+[[id:d30cf069-0ff3-4544-83e3-6fc450f0ed75][OPTIMAL ERROR ESTIMATES OF A LINEARIZED BACKWARD EULER FEM FOR THE LANDAU–LIFSHITZ EQUATION"]]
