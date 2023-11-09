@@ -36,6 +36,25 @@
 
 ## Numerical Scheme
 
+* <font color='red'>Inspired by the idea</font> of dealing with interface free energy with variable-coefficients, we find that the
+  IEQ method can effectively solve the FCH gradient flow equation.
+
+  翻译: 受利用变系数处理边界自由能量的思路<font color='red'>启发</font>,我们发现 IEQ 可以有效地求解 FCH 梯度流方程.
+  <font color='red'>本句主要是运用了 Inspired by the idea of 这个词组, 用来引出参考的思路文献,比较适合于刚开始介绍自己的格式使用</font>
+
+* <font color='red'>A very important aspect of</font> evaluating a numerical scheme designed for the phase-field equation is
+  whether the scheme is energy stable, or whether it can dissipate the energy of the system in the
+  discrete space.
+  翻译:评估为相场方程设计的数值格式的<font color='red'>一个非常重要的方面</font>是该格式是否能量稳定，或者是否可以在
+  离散空间中耗散系统的能量。
+  <font color='red'>本句主要用于引入设计格式的性质,如能量衰减,质量守恒等等,作为过渡句使用</font>
+
+* 
+
+* 
+
+  
+
 ## Numerical Example
 
 ## Conclusion
