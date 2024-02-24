@@ -1,5 +1,0 @@
-:PROPERTIES:
-:ID:       8c6d8489-4479-42bd-a50b-3f8755b400a3
-:END:
-#+title: 系统分析师
-

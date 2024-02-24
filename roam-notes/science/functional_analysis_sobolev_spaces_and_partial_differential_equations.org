@@ -1,0 +1,280 @@
+:PROPERTIES:
+:ID:       78682975-bf12-494a-ac2a-a641001bf511
+:END:
+#+title: Functional Analysis, Sobolev Spaces and Partial Differential Equations
+#+SETUPFILE:  ../00-latex-preamble.org
+#+OPTIONS: tex: imagemagick
+#+LATEX_HEADER:\usepackage{ctex}
+#+FILETAGS: Science Research
+
+* Chapter 1
+**  Hahn-Banach定理的解析形式--线性泛函延拓
+*Theorem 1.1 (H-B定理解析形式)* 设映射 \(p:E\to\mathbb{R}\) 满足
+
+\begin{align*}
+&p(\lambda x)=\lambda p(x),\ \forall x\in E ,\ \lambda>0\\
+&p(x+y)\leq p(x)+p(y),\ \forall x,y\in E
+\end{align*}
+
+此外, \(G\) 为 \(E\) 上的线性子空间以及线性泛函 \(g:G\to\mathbb{R}\) 满足
+
+\begin{equation*}
+g(x)\leq p(x),\ \forall x\in G
+\end{equation*}
+
+那么存在 $E$ 上的线性泛函 $f$ 延拓 $g$, 即 $f(x)=g(x),\ \forall x\in G$ 且成立 $f(x)\leq p(x),\ \forall x\in E$.
+
+*** Zorn 引理
+在介绍 Zorn 引理之前, 我们先介绍一些后续将会用到的符号.
+设 $(P,\leq)$ 是一个有序集(偏序集), 我们称子集 $Q\subset P$ 完全有序, 若对于 $Q$ 中任意一对 $a,b$ 有序关系 $a\leq b$, $b\leq a$ 或者二者同时成立.
+- **Remark 1. 完全有序指集 $Q$ 中所有元素都可进行比较序关系,例如数集**
+
+设子集 $Q\subset P$, 称 $c\in P$ 是 $Q$ 的上界, 如果 $\forall x\in Q$ 都有 $x\leq c$ 成立. 称 $m\in P$ 是 $P$ 的极大元, 如果不存在 $P$ 中的元素 $x$ 满足 $m\leq x$, 除了 $m=x$.
+- **Remark 2. 我们上面定义的极大元和最大元是不一样的, 具体的差异是, 极大元指的是在能够比较的元素之中没有比他大的元素, 而最大元则要求他能和全部元素可比且没有比他大的元素**
+
+我们称集合 $P$ 是诱导的 $(\text{inductive})$, 如果 $P$ 的任意完全有序子集均有上界 
+
+**Zorn Lemma** 任意非空有序(偏序)的诱导集合有极大元
+
+**Proof of Theorem 1.1** 
+- **Key: 定义一个集合 $P$ 和其上的偏序关系 $\leq$, 证明其是诱导的, 构造其极大元.**
+  
+考虑这样的集合
+
+$$
+P=\left\{h:D(h)\subset E\to\mathbb{R}\left|\begin{aligned}&D(h)\ \text{is a linear subspace of}\ E\\&h\ \text{is linear},\ G\subset D(h)\\&h\ \text{extends}\ g,\ \text{and}\ h(x)\leq p(x),\ \forall x\in D(h)\end{aligned}\right.\right\}
+$$
+
+在 $P$ 上我们赋予偏序关系 $\leq$, 即
+$$
+h_1\leq h_2\Leftrightarrow D(h_1)\subset D(h_2),\ h_2\ \text{延拓}\ h_1.
+$$
+显然 $P$ 非空, 因为 $g\in P$.
+
+下面我们要说明 $P$ 是一个诱导集, 也就是我们要说明任意一个 $P$ 的完全有序子集都有上界.
+我们假设 $Q\subset P$ 是一个完全有序集合, 我们可以记 $Q=\{h_i\}_{i\in I}$ ($I$ 是指标集), 我们定义一个线性泛函 $h$ 满足
+o
+$$
+D(h)=\bigcup_{i\in I} D(h_i),\quad h(x)=h_i(x),\ \text{if}\ x\in D(h_i)
+$$
+
+- **Remark 3. 对于定义的线性泛函 $h$ 是否是良定义的, 我们给出一定的说明. 如果 $D(h_1)\bigcap D(h_2)\not=\emptyset$, 因为 $Q$ 是完全有序的, 因此我们不妨假设序关系 $h_1\leq h_2$ 成立, 故 $h_2$ 延拓了 $h_1$, 即 $h_2(x)=h_1(x)$, $\forall x\in D(h_2)\bigcap D(h_1)$.**
+
+显然 $h\in P$ 且 $h$ 是 $Q$ 的上界(指定义的伴序关系下的上界). 因此根据 Zorn Lemma 知, 我们构造的 $P$ 存在极大元, 不妨设其为 $f$. 下面我们证明 $D(f)=E$, 我们采用反证法的技巧.
+
+如果 $D(f)\not=E$, 也就是说存在 $x_0\in E$ 但是 $x_0\not\in D(f)$. 我们构造一个 $E$ 的子集 $D(h)=D(f)+\mathbb{R} x_0$, 其对应的线性泛函是 $h$, 其满足
+$$
+h(x+tx_0)=f(x)+t\alpha,\ (t\in \mathbb{R},\ \forall x\in D(f))
+$$
+其中的常数 $\alpha$ 我们将在后续讨论中给出取值方法. 我们为了推出矛盾, 要验证 $h\in P$, 也就是通过选取 $\alpha$ 来保证 $f(x)+t\alpha\leq p(x+tx_0),\ \forall t\in \mathbb{R},\ \forall x\in D(f)$ 成立.
+
+由 (1) 式知, 我们只需要保证下式成立即可,
+
+$$
+\left\{\begin{aligned}
+&f(x)+\alpha\leq p(x+x_0)\\
+&f(x)-\alpha\leq p(x-x_0)
+\end{aligned}\right.
+$$
+
+由于二者等价性比较显然, 我们隐去不谈. 根据上式知, 我们选取 $\alpha$ 满足 $$\sup_{y\in D(f)}\{f(y)-p(y-x_0)\}\leq\alpha\leq\inf_{x\in D(f)}\{p(x+x_0)-f(x)\}$$
+下面我们只用说明这样的 $\alpha$ 是存在的,
+
+\begin{align*}
+&\qquad f(x)+f(y)=f(x+y)\leq p(x+y)\leq p(y-x_0)+p(x+x_0)\\
+&\Rightarrow f(y)-p(y-x_0)\leq p(x+x_0)-f(x)
+\end{align*}
+
+这代表 $\alpha$ 是存在的, 因此 $h\in P$ 且 $f\leq h$, 这与 $f$ 是极大元矛盾. 因此 $D(f)=E$.
+
+*** H-B 定理的应用 
+考虑 H-B 定理的应用, 考虑集合 $E$ 是赋范向量空间(n. v. s.) 
+
+范数本质上也是一种映射 $\Vert\cdot\Vert:E\to\mathbb{R}$ 满足
+\begin{align*}
+&\Vert x+y\Vert\leq\Vert x\Vert+\Vert y\Vert,\ \forall x,y\in E\\
+&\Vert\alpha x\Vert=|\alpha|\Vert x\Vert,\ \alpha\in\mathbb{R},\ \forall x\in E\\
+&\Vert x\Vert=0\Rightarrow x=0(\text{此处 }0\text{ 并不是简单的数,而是向量空间的零元})
+\end{align*}
+我们记 $E^\star$ 为 $E$ 的对偶空间, 即 $E$ 上定义的所有连续线性泛函构成的空间, 同样我们可以构造 $E^\star$ 上的范数为 
+
+$$
+\Vert f\Vert_{E^\star}=\sup_{\tiny	\Vert x\Vert=1,x\in E}|f(x)|=\sup_{\tiny	\Vert x\Vert=1,x\in E}f(x)
+$$
+
+$\forall f\in E^\star, x\in E$, 我们称 $\langle f,x\rangle=f(x)$ 且称 $\langle\cdot,\cdot\rangle$ 是定义在对偶集 $E,E^\star$ 的数量积.
+
+**Proposition** $E^\star$ 是一个 Banach 空间, 尽管我们并没有给出 $E$ 的完备性.
+
+**Proof.** 我们要证明 $E^\star$ 是 Banach 空间, 等价于证明 $\forall \{f_n\}\subset E^\star$ 是 Cauchy 列, 则 $\exists f\in E^\star,\ f_n\to f$.
+
+$\forall x\in E$, 有 $|f_n(x)-f_m(x)|\leq\Vert f_n-f_m\Vert\cdot\Vert x\Vert$, 且由于 $f_n$ 是 $E^\star$ 上的 Cauchy 列, 故 $\Vert f_n-f_m\Vert\to 0,\ n,m\to \infty$. 因此 $\forall x\in E$, 有 $|f_n(x)-f_m(x)|\to 0,\ n,m\to \infty$, 即 $f_n(x)$ 是 $\mathbb{R}$ 上的 Cauchy 列, $f_n(x)$ 收敛, 不妨我们记其收敛到 $f(x)$.
+
+下面我们仅需要说明 $f_n$ 在 $E^\star$ 上是收敛到 $f$ 的, 也就是说, $\forall \epsilon>0$, $\exists N>0$, $\forall n>N$, $\Vert f_n-f\Vert\leq \epsilon$. 显然 $f(x)$ 是线性泛函, 由上确界的定义可得
+$$
+\forall \epsilon>0,\exists x_0\in E,\ \Vert x_0\Vert=1,\ |f_n(x_0)-f(x_0)|\geq\Vert f_n-f\Vert-\epsilon.
+$$
+两边取上极限得
+$$
+\overline{\lim_{n\to\infty}}\Vert f_n-f\Vert\leq\lim_{n\to\infty}|f_n(x_0)-f(x_0)|+\epsilon=\epsilon
+$$
+因此证毕.
+
+**Corollary 1** 记 $G$ 是 $E$ 的子向量空间, 若 $g:G\to \mathbb{R}$ 是连续线性泛函, 那么在 $E^\star$ 中存在一个线性泛函 $f$ 延拓了 $g$ 且满足
+
+$$
+\Vert f\Vert_{E^\star}=\sup_{\tiny	\Vert x\Vert=1,x\in G}|g(x)|=\Vert g\Vert_{G^\star}
+$$
+
+**Proof.** 我们令 $p(x)=\Vert g\Vert_{G^\star}\Vert x\Vert$ , 应用 H-B 定理知有 $f(x)\leq p(x)=\Vert g\Vert_{G^\star}\Vert x\Vert,\ \forall x\in E$, 因此 $\Vert f\Vert_{E^\star}\leq\Vert g\Vert_{G^\star}$. 同时有下式成立
+$$
+\Vert f\Vert_{E^\star}=\sup_{\tiny	\Vert x\Vert=1,x\in E}|f(x)|\geq\sup_{\tiny	\Vert x\Vert=1,x\in G}|g(x)|=\Vert g\Vert_{G^\star}
+$$
+综上所述, $\Vert f\Vert_{E^\star}=\Vert g\Vert_{G^\star}$.
+
+**Corollary 2** $\forall x_0\in E,\ \exists f_0\in E^\star$ 使得 $\Vert f_0\Vert_{E^\star}=\Vert x_0\Vert_E$ 且 $\langle f_0,x_0\rangle=\Vert x_0\Vert^2$
+
+**Proof.** 考虑 $G=\mathbb{R} x_0$ 和 $g(tx_0)=t\Vert x_0\Vert^2$. 下我们说明 $\Vert g\Vert_{G^\star}=\Vert x_0\Vert^2$, 依据定义可立马得到,
+$$
+\Vert g\Vert_{G^\star}=\sup_{\tiny    \Vert x\Vert=1,x=tx_0}|g(tx_0)|=\sup_{\tiny \Vert x\Vert=1,x=tx_0}t\Vert x_0\Vert^2=\Vert x_0\Vert
+$$
+根据 Corollary 1的结果, 存在 $f_{0}\in E^\star$ 满足 $\Vert f_0\Vert_{E^\star}=\Vert g\Vert_{G^\star}=\Vert x_0\Vert$ 和 $\langle f_0,x_0\rangle=f_0(x_0)=g(x_0)=\Vert x_0\Vert^2$.
+** Hahn-Banach定理几何形式——凸集分离
+**超平面的定义** 
+超平面(hyperplane)指 $H\subset E$ 且其形如 $H=\{x\in E|f(x)=\alpha\}=[f=\alpha]$,其中 $f$ 为 $E$ 上非恒为 $0$ 的线性泛函, $\alpha\in\mathbb{R}$ 为常数, **($f$ 不要求连续)**, 此时称 $f(x)=\alpha$ 是超平面 $H$ 的方程.
+
+我们先针对线性泛函不一定连续这个命题做一些简单的解释.
+
+**Proposition 1** 设 $E$ 是无穷维空间,那么存在 $E$ 中的Hamel基 $\{e_i\}$ 满足 $\Vert e_i\Vert=1$.
+
+**Proof** 我们记 $P$ 为由 $E$ 中线性无关集构成的集合.显然, $P$ 是诱导集,利用 Zorn 引理可以得到 $P$ 有极大元,不妨我们记其为 $\{e_i\}_{i\in I}$, 这就是我们所说的Hamel基. 此时找到的基可能不满足 $\Vert e_i\Vert\not=1$,我们只需要做一次归一化就可以.
+
+**Proposition 2** 在上述命题的基础之上，我们可以得到存在这样的函数，他线性但是他不连续。
+
+**Proof** 因为 $E$ 是无穷维空间，因此我们可以假设 $\mathbb{N}\subset I$. 那我们就可以构造一个 $E$ 上的特殊函数 $f$,
+
+\begin{cases}
+&f(e_i)=i,\ i\in\mathbb{N}\\
+&f(e_i)=0,\ i\in I\backslash\mathbb{N}
+\end{cases}
+
+**Proposition 3** 超平面 $H=[f=\alpha]$ 是闭的 $\Leftrightarrow$ $f$ 是连续的
+
+**Proof** 如果 $f$ 是连续的,显然有超平面 $H$ 是闭的.
+
+反之如果 $H$ 是闭的,那么 $H^C$ 是开集并且非空 ***(由 $f\not\equiv0$ 保证)***.设 $x_0\in H^C$,则 $f(x_0)\not=\alpha$.不妨我们假设 $f(x_0)<\alpha$, 我们取$r>0$,使 \(B(x_0,r)=\{x\in E|\Vert x-x_0\Vert < r\}\subset H^C\), 则成立 $f(x)<\alpha,\ B(x_0,r)$.事实上,若存在 $x_1\in B(x_0,r)$,使得 $f(x_1)>\alpha$,构造线段 $\{x_t=(1-t)x_0+tx_1|t\in[0,1]\}$ 包含在 $B(x_0,r)$, 可以由下面的式子保证,
+$$
+\Vert x_t-x_0\Vert=\Vert t(x_1-x_0)\Vert\leq \Vert x_1-x_0\Vert< r
+$$
+因此线段上的点也满足 $f(x_t)\not=\alpha$, $\forall t\in[0,1]$.
+
+为了后续导出矛盾,我们选取一个特殊的 $t=\frac{\alpha-f(x_0)}{f(x_1)-f(x_0)}\in(0,1)$,那么有$$
+f(x_t)=f((1-t)x_0+tx_1)=f(x_0)+t(f(x_1)-f(x_0))=\alpha
+$$这与 $x_t\in H^C$ 矛盾. 因此有 \(f(x_0+rz)\alpha,\ \forall z\in B(0,1)\),根据 $f$ 是线性的, 故$|f(z)|<\frac{1}{r}(\alpha-f(x_0))$,因此 $f$ 满足 $\Vert f\Vert\leq \frac{1}{r}(\alpha-f(x_0))$.根据有界算子的特性知,有界性和连续性等价.
+
+**Def** 设 $A\subset E, B\subset E$, 称 $H=[f=\alpha]$ 分离 $A$ 和 $B$, 若满足
+$$
+f(x)\leq\alpha,\ \forall x\in A\ \text{and}\ f(x)\geq\alpha,\ \forall x\in B.
+$$
+进一步,我们称 $H$ 严格分离 $A,\ B$,则若 $\exists \epsilon>0$,使 $f(x)\leq\alpha-\epsilon,\ \forall x\in A$ 且 $f(x)\geq\alpha+\epsilon,\ \forall x\in B$.
+
+我们从几何上来看, \(A,B\) 分别位于由超平面 $H$ 分割出的两个半平面上,如图所示
+#+BEGIN_EXPORT html
+<img src="https://cdn.jsdelivr.net/gh/LYD122504/picture@main/20240123/屏幕截图-2024-01-23-083637.8h96r3z6ve8.png" width="60%" />
+#+END_EXPORT
+在此重新明确一下凸集的定义: 如果 $x,y\in A$,则要求 \(tx+(1-t)y\in A,\ t\in[0,1]\).
+*** Hahn-Banach定理第一几何形式
+
+**Thm (Hahn-Banach定理第一几何形式)** 设 \(A\subset E,\ B\subset E\) 为两个互不相交的非空凸集,若 $A$ 是开集, 则存在闭的超平面分离 \(A,\ B\).
+
+为了证明这个定理,我们先给出几个引理,
+
+**Lemma 1** 设 $C\subset E$ 是一个凸的开集并且 $0\in C$, 针对任意的$x\in C$, 我们定义如下泛函
+$$
+p(x)=\inf\{\alpha>0|\alpha^{-1} x\in C\}
+$$
+称其为 $C$ 的度量 (gauge), 又称其为 $C$ 的 Minkowski 泛函,则 $p(x)$ 满足下列性质
+$$\begin{aligned}&1.\ p(\lambda x)=\lambda p(x),\ \forall x\in E,\ \lambda>0,\\&2.\ p(x+y)\leq p(x)+p(y),\ \forall x,y\in E,\\&3.\exists M,s.t. 0\leq p(x)\leq M\Vert x\Vert,\ \forall x\in E\\&4.C=\{x|p(x)<1\}\end{aligned}$$
+**Proof** 1.显然成立,即
+$$
+p(\lambda x)=\inf\{\alpha>0|\alpha^{-1}\lambda x\in C\}=\lambda\inf\{\alpha\lambda^{-1}|(\alpha\lambda^{-1})^{-1}x\in C\}=\lambda p(x)
+$$
+下面我们证明3成立,根据题目可得,设 $r>0$,我们可以构造一个开球 $B(0,r)\subset C$. 显然有 $p(x)\leq\frac{1}{r}\Vert x\Vert,\ \forall x\in E$, 下面给出一定的解释.
+
+ 当 $x=0$, 有 $p(x)=0$.但 $x\not=0$ 时,我们可以对 $x$ 做单位化,记$y=\frac{x}{\Vert x\Vert}$,此处我们取 $r=\sup\{\delta|\delta\cdot y\in B(0,r)\subset C\}$,因此 $p(y)\leq\frac{1}{r}\Rightarrow p(x)\leq\frac{1}{r}\Vert x\Vert$.
+
+下证明 4 成立,设 $x\in C$ 并且 $C$ 是开集, 故存在$\epsilon>0$,使得 $(1+\epsilon)x\in C$ 成立,因此 $p(x)\leq\frac{1}{1+\epsilon}<1$.反之如果有 $p(x)<1$ 成立,那么有 $0<\alpha<1$ 使得 $\alpha^{-1}x\in C$.从而有 $x=\alpha(\alpha^{-1}x)+(1-\alpha)0\in C$,这由 $C$ 的凸集性质保证.
+
+下说明 2 成立.设 $\forall x,\ y\in E$ 并且 $\epsilon>0$,由1和4可知 $\frac{x}{p(x)+\epsilon},\frac{y}{p(y)+\epsilon}\in C$.
+由于C是凸集,因此 $\forall t\in[0,1]$,有 $t\frac{x}{p(x)+\epsilon}+(1-t)\frac{y}{p(y)+\epsilon}\in C$.
+为了给出证明,我们选取特殊的 $t$ 即 $t=\frac{p(x)+\epsilon}{p(x)+p(y)+2\epsilon}$,代入可得 $\frac{x+y}{p(x)+p(y)+2\epsilon}\in C$.
+因此有 $p(x+y)< p(x)+p(y)+2\epsilon$ ,此时我们令 $\epsilon\to0$,式 2 即可证明.
+
+**Lemma 2** 设 $C\subset E$ 并且 $C$ 是一个非空凸开集.若 $x_0\in E$ 且 $x_0\not\in C$, 那么就存在 $f\in E^\star$,使得 $f(x)<f(x_0),\ \forall x\in C$. 特别地, 超平面 $[f=f(x_0)]$ 分离了点 $x_0$ 和集合 $C$.
+
+**Proof** 我们假设 $0\in C$ 成立, 不然的话, 我们总可以通过平移来使得其成立, 这并不会对我们的结果造成影响,因此我们直接假设其成立即可. 我们引入 Lemma 1 中定义的 $C$ 的度量 $p(x)$. 我们考虑 $E$ 的线性子空间 $G=\mathbb{R}x_0$ 和定义在其上的线性泛函 $g(tx_0)=t,\ t\in\mathbb{R}$. 我们接下来要说明这个线性泛函是被我们前面引入的度量泛函控制的.
+
+1.如果 $t>0$, 根据 Lemma 1 推导的性质知, $p(tx_0)=tp(x_0)$.又根据题设知 $x_0\not\in C$ 并且 $0\in C$, 因此 $p(x_0)\geq 1,\ p(tx_0)\geq t=g(x)$
+
+2.如果 $t\leq 0$, $p(x)\geq g(x)$ 是显然成立的.
+
+由 Hahn-Banach 定理的解析形式, 存在 $f$ 是 $E$ 上线性泛函延拓了 $g$ 并且 $f(x)\leq p(x),\ \forall x\in E$. 因此 $f(x_0)=g(x_0)=1$. 由 Lemma 1 导出的度量泛函性质, 我们可以得到 $f$ 也是有界泛函, 即 $f(x)\leq p(x)\leq M\Vert x\Vert$, 所以 $f$ 是连续线性泛函. 根据 Lemma 1 可知, $f(x)<1,\ \forall x\in C$.
+
+**Proof of Thm** 令 $C=A-B$ 且 $C$ 是凸集. 同时 $C$ 是开集, 这是因为我们可以将 $C$ 改写成 $C=\bigcup_{y\in B}(A-y)$
+**(题设中 $A$ 是开集在此应用)**, 但是 $0\not\in C$.
+由 Lemma 2 可知, $\exists f\in E^\star$, 使得 $f(z)<0,\ \forall z\in C$ **(此处要求 $f(0)=0$,如果不成立的话,我们只需要平移 $f$ 即可)**.
+此式可得到 \(f(x) < f(y),\ \forall x\in A,\ y\in B\). 此时我们选取 $\alpha$ 满足 $\sup_{x\in A}f(x)\leq\alpha\leq\inf_{y\in B}f(y)$. 因此 $[f=\alpha]$ 分离了 $A$ 和 $B$.
+
+*** Hahn-Banach定理第二几何形式
+
+**Thm (Hahn-Banach定理第二几何形式)** 设 $A\subset E,\ B\subset E$ 是两个互不相交的凸集, 设 $A$ 是闭集, $B$ 是紧集, 则存在闭超平面严格分离 $A$ 和 $B$.
+
+**Proof** 令 $C=A-B$, 同样我们可以得到 $C$ 是凸集. 我们宣称 $C$ 是闭集.
+
+ 下面给出这个宣称的证明, 若 $c_n=a_n-b_n$ 且 $c_n\to c_0$, 我们只需要说明 $c_0\in C$ 即完成证明. 由于 $B$ 是紧集, 因此 $b_n\to b_0\in B$. $a_n=b_n+c_n\to b_0+c_0\in A$, 因此 $A$ 是闭集. 此处我们记 $a_0=b_0+c_0\in A$, 因此 $c_0=a_0-b_0\in C$.
+
+ 同样我们可知 $0\not\in C$, 因此 $\exists r>0$, 使得 $B(0,r)\cap C=\emptyset$. 根据 Hahn-Banach 定理第一几何形式, 存在闭超平面分离了 $B(0,r)$ 和 $C$,即
+$$
+ \exists f\in E^\star,\ f\not\equiv 0,\ f(x-y)\leq f(rz),\ \forall x\in A,\ y\in B,\ z\in B(0,1).
+ $$
+ 故 $f(x-y)\leq -r\Vert f\Vert,\ \forall x\in A,\ y\in B$. (此式的导出基于 $|f(rz)|=r|f(z)|\leq r\Vert f\Vert$).
+
+ 令 $\epsilon=\frac{r}{2}\Vert f\Vert>0$, 则有 $f(x)+\epsilon\leq f(y)-\epsilon,\ \forall x\in A,\ y\in B$ 成立. 因此我们选取 $\alpha$ 满足 $\sup_{x\in A}f(x)+\epsilon\leq\alpha\leq\inf_{y\in B}f(y)-\epsilon$, 所以闭超平面 $[f=\alpha]$ 严格分离 $A$ 和 $B$.
+
+**Corollary 1** 设 $F\subset E$ 是 $E$ 的线性子空间, 使得 $\overline{F}\not=E$, 那么 $\exists f\in E^\star$ 且 $f\not\equiv 0$, 使得 $\langle f,x\rangle=0,\ \forall x\in F$.
+
+**Proof** 由题设可知, $\exists x_0\in E$ 且 $x_0\not\in \overline{F}$. 我们记 $A=\overline{F},\ B=\{x_0\}$, 显然此处的 $A$ 是闭的, 而 $B$ 则是紧的. 依托 H-B 定理的第二几何形式可知存在一个闭超平面 $[f=\alpha]$ 严格分离 $A$ 和 $B$, 即 $\langle f,x\rangle<\alpha<\langle f,x_0\rangle,\ \forall x\in F$. 因为 $F$ 是线性子空间, 因此有 $\lambda \langle f,x\rangle<\alpha,\ \forall \lambda\in\mathbb{R}\Rightarrow \langle f,x\rangle=0,\ \forall x\in F$.
+
+- **Remark** 该推论一般用于判断子空间 $F\subset E$ 是否在 $E$ 上稠密. 如果稠密, 则有 $\forall f$ 满足 $\langle f,x\rangle=0,\ \forall x\in F$, 同时有 $\langle f,x\rangle\equiv0,\ \forall x\in E$
+** 二次对偶空间和正交关系
+
+设 $E$ 是赋范向量空间, $E^\star$ 是其对偶空间, 其上定义的范数为
+$$\Vert f\Vert_{E^\star}=\sup_{x\in E,\ \Vert
+x\Vert\leq1}|\langle f,x\rangle|,\ f\in E^\star$$
+二次对偶空间 $E^{\star\star}$ 则是对偶空间 $E^\star$ 的对偶空间并且在其上定义的范数为
+$$\Vert \xi \Vert_{E^{\star\star}}=\sup_{f\in E^\star,\ \Vert f\Vert\leq1}|\langle\xi,f\rangle|,\ \xi\in E^{\star\star}$$
+我们定义典范内射<font color='red'>(canonical injection)</font> $J:E\to E^{\star\star}$ 如下:
+
+对于给定的 $x\in E$, 映射 $f\to\langle f,x\rangle$ 是 $E^\star$ 上的连续线性泛函, 因此 $x$ 是 $E^{\star\star}$ 的元素, 记作 $Jx$.
+
+- **Remark 对于此映射, 我们固定 $x$, 讨论 $f$ 在 $E^\star$ 上变化, 则其为 $E^\star$ 上的连续线性泛函. 反之如果固定 $f$, 令 $x$ 在 $E$ 上变化, 则其为 $E$ 上的连续线性泛函.**
+
+因此, 我们有下式成立
+$$\langle Jx,f\rangle_{E^{\star\star},E^\star}=\langle f,x\rangle_{E^\star,E}=f(x),\ \forall x\in E,\ f\in E^\star$$
+显然映射 $J$ 是线性的且等距的, 即 $\Vert Jx\Vert_{E^{\star\star}}=\Vert x\Vert$. 
+
+对于等距性, 我们给出一定的解释, $\Vert Jx\Vert_{E^{\star\star}}=\sup_{f\in E^\star,\Vert f\Vert\leq1}|\langle f,x\rangle|=\Vert x\Vert$, 用到了前面文章中的推论.
+
+我们定义的映射 $J$ 并不一定是满射, 也就是说 $J(E)\subset E^{\star\star}$ 可能只是子空间. 如果 $J$ 是满射, 那么我们就将 $E$ 称为自反的, 也就是 $E=E^{\star\star}$ ****(二者在等距同构意义之下是相同的)**
+
+我们引入一些记号, 如果 $M\subset E$ 是一个线性子空间, 那么我们记 $M^\perp=\{f\in E^\star|\langle f,x\rangle=0,\ \forall x\in M\}\subset E^\star$, 其为 $M$ 的正交空间, 同时其在 $E^\star$ 上是闭的.**(该集合的含义是作用在 $M$ 上为 $0$ 的连续线性泛函的集合)**. 同样, 我们可以定义 $E^\star$ 的线性子空间 $N$ 的正交空间为 $N^\perp=\{x\in E|\langle f,x\rangle=0,\ \forall f\in E^\star\}$, 同样其在 $E$ 中是闭的.
+
+**Propsition 1** 设 $M\subset E$ 是线性子空间, 则 $\left( M^\perp\right)^\perp=\overline{M}$; $N\subset E^\star$ 线性子空间, 则 $\overline{N}\subset\left(N^\perp\right)^\perp$.
+
+**Proof** 显然有 $M\subset\left( M^\perp\right)^\perp$, 又因为 $\left( M^\perp\right)^\perp$ 为闭集, 因此有 $\overline{M}\subset\left( M^\perp\right)^\perp$. 同样, 我们可以推得 $\overline{N}\subset\left( N^\perp\right)^\perp$.
+
+下面我们要说明 $\left( M^\perp\right)^\perp\subset \overline{M}$. 我们采用反证法. 假设存在 $x_0$ 满足 $x_0\in\left( M^\perp\right)^\perp$ 但是 $x_0\not\in \overline{M}$. 依据H-B定理的第二几何形式知, 存在一个超平面严格分离 $\{x_0\}$ 和 $\overline{M}$, 即
+$$
+\exists f\in E^\star,\ \alpha\in\mathbb{R},\ \text{使得}\ \langle f,x\rangle<\alpha<\langle f,x_0\rangle,\ \forall x\in M\Rightarrow \langle f,x\rangle=0,\ \forall x\in M.
+$$
+因此 $f\in M^\perp$, 而 $\langle f,x_0\rangle>0$, 又由于 $x_0\in \left( M^\perp\right)^\perp$, 应有 $\langle f,x\rangle=0$, 矛盾, 因此有 $\left( M^\perp\right)^\perp\subset \overline{M}$. 综上所述命题得证.

@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       d82196a6-63f9-4e48-9fe5-733ed8b9a51c
+:END:
+#+title: SVD
+#+SETUPFILE:  ../00-latex-preamble.org
+#+FILETAGS: Research Tips

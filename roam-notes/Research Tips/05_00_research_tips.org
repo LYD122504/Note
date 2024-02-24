@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       6833e3c5-0428-493a-9296-ce9aa052f62e
+:END:
+#+title: 05-00 Research Tips
+#+SETUPFILE:  ../00-latex-preamble.org
+#+FILETAGS: Research Tips
+1. [[id:6f996598-bb0e-409d-8e14-6af3903f1327][05-01 Matrix Decomposition]]
+   
+2. [[id:3c675147-488e-4956-8761-c56f5d7120aa][05-02 Useful Inequality]]
+
+3. [[id:6362e38d-d6d7-4a30-9345-b8b90256b032][05-03 Useful lemma]]
+   

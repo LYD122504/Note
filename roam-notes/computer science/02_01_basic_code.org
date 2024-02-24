@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       91afcba9-8a93-4786-826b-94d6d405b813
+:END:
+#+title: 02-01 Basic Code
+#+SETUPFILE:  ../00-latex-preamble.org
+#+OPTIONS: tex:imagemagick
+#+FILETAGS: computer
+- tag ::
+1. Python
+   - [[id:ff65b715-7f16-4ed5-9427-328554700a47][Python基础教程第三版]]

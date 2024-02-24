@@ -1,0 +1,9 @@
+* LS2020ErrorAnalysisSAVMAC
+:PROPERTIES:
+:NOTER_DOCUMENT: c:/Users/Liyaoda/Nutstore/1/zotero/LS2020ErrorAnalysisSAVMAC.pdf
+:END:
+** s
+:PROPERTIES:
+:NOTER_PAGE: 1
+:END:
+sda

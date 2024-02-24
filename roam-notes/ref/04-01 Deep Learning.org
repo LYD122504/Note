@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       015a562f-a03b-4665-9566-c315b7884f35
+:END:
+#+title: 04-01 Deep Learning
+#+SETUPFILE: ../latex-preamble.org
+#+FILETAGS: reading research
+#+MACRO: begin_centered_contents @@html:<div align="center">@@
+#+MACRO: end_centered_contents @@html:</div>@@
+ - tags :: 04-01 Deep Learning 
+* Reduced Order Model
+** Hamiltonian Operator Inference: Physics-preserving Learning of Reduced-order Models for Canonical Hamiltonian Systems
+- Author: Harsh Sharma, Zhu Wang, Boris Kramer
+- Journal: Physica D: Nonlinear Phenomena
+- Summary:
+  In this paper, the authors introduced a nonintrus
+[[id:dd7393f6-6ce2-45a7-8a1b-4c4adb705480][Hamiltonian Operator Inference: Physics-preserving Learning of Reduced-order Models for Canonical Hamiltonian Systems]]
+
+** Symplectic Model Reduction of Hamiltonian Systems
+
+[[id:76b5d6f1-b600-46fa-8814-a30e011a2229][Symplectic Model Reduction of Hamiltonian Systems]]

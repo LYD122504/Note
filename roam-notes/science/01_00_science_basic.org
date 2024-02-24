@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       4e76dca1-24b3-4917-babf-d05d1a7a723a
+:END:
+#+title: 01-00 Science-Basic
+#+SETUPFILE:  ../00-latex-preamble.org
+#+OPTIONS: tex:imagemagick
+#+FILETAGS: Science Research
+- title  01-00 Science-Basic
+- tags ::
+  科研基础导航：
+ - [[id:2bcec7fe-7fe2-46d8-b36d-6eafdd7cb22b][01-01 Analysis]]
+
+ - [[id:4758bb14-fca8-47b5-b0c5-26ee6956609b][01-02 Numerical Methods]]
+
+ - [[id:2f708583-42ad-4427-8755-cfd6ef2b7278][01-03 Writing]]

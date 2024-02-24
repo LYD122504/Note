@@ -1,7 +1,0 @@
-:PROPERTIES:
-:ID:       cc6667ed-cf96-4c22-a384-db6bdb9fcb6e
-:END:
-#+title:  Gagliardo–Nirenberg–Sobolev inequality  
-- tag :: 
- #+DOWNLOADED: screenshot @ 2023-09-14 21:42:01
- [[file:img/2023-09-14_21-42-01_screenshot.png]]

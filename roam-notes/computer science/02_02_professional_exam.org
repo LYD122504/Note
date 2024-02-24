@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       37c05de8-9388-41ef-a7b7-f962d33149b7
+:END:
+#+title: 02-02 Professional Exam
+#+SETUPFILE:  ../00-latex-preamble.org
+#+OPTIONS: tex:imagemagick
+#+FILETAGS: computer
+- tag ::
+- 系统分析师
+  -[[id:672d5685-439d-4c65-a715-74529070f8b0][系统分析师教程]]

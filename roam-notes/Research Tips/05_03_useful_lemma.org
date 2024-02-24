@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       6362e38d-d6d7-4a30-9345-b8b90256b032
+:END:
+#+title: 05-03 Useful lemma
+#+SETUPFILE:  ../00-latex-preamble.org
+#+FILETAGS: Research Tips

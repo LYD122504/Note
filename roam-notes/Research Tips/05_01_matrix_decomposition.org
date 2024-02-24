@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       6f996598-bb0e-409d-8e14-6af3903f1327
+:END:
+#+title: 05-01 Matrix Decomposition
+#+SETUPFILE:  ../00-latex-preamble.org
+#+FILETAGS: Research Tips
+- Singular Value Decomposition: [[id:d82196a6-63f9-4e48-9fe5-733ed8b9a51c][SVD]]
+
+- Proper Orthogonal Decomposition: [[id:e9ea8061-5abc-46f4-bec4-f9091e2b7c6c][POD]]

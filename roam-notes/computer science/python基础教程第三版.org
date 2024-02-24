@@ -1,0 +1,185 @@
+:PROPERTIES:
+:ID:       ff65b715-7f16-4ed5-9427-328554700a47
+:END:
+#+title: Python基础教程第三版
+#+SETUPFILE:  ../00-latex-preamble.org
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://rawgit.com/richleland/pygments-css/master/default.css" />
+#+FILETAGS: computer
+- tags :: 
+* Chapter 1 基础知识
+** 1.1 常见运算符号
+
+*** 整除运算
+#+begin_src python
+print( 1 // 2)
+0
+print( 1 // 1)
+1
+print( 5.0 // 2.4)
+2.0
+#+end_src
+
+Python的整除是允许数值类型为浮点型的, 但是如果运算数中有一个是浮点型, 那么输出结果的数据类型就是浮点型; 反之如果全是整型, 那么结果依旧是整型.
+
+整除的本质其实是将除法结果向下圆整
+
+*** 求余运算
+
+#+begin_src python
+print( 10 % 3)
+1
+print( 10 % -3)
+-2
+print( -10 % 3)
+2
+print( -10 % -3)
+-1
+#+end_src
+
+求余运算符可用于计算负数的求余运算.
+
+同样求余运算也可以用在浮点数运算，如果运算数中有一个是浮点型, 那么输出结果的数据类型就是浮点型; 反之如果全是整型, 那么结果依旧是整型.
+
+*** 乘方运算
+
+#+begin_src python
+print( 2 ** 3)
+8
+#+end_src
+
+和上面的运算符的类型一样, 乘方运算同样可以应用于
+
+需要注意的是, 乘方运算的运算级别比求负运算高, 因此如果我们计算 -3\*\*2, 实际上是计算 -(3\*\*2). 如果我们要计算 -3 的平方, 那我们应该用 (-3)\*\*2
+
+*** 不同进制转换运算
+
+#+begin_src python
+print(0xAF)
+175
+print(0o10)
+8
+print(0b1011010010)
+722
+#+end_src
+
+0x表示十六进制, 0o表示八进制, 0b表示二进制
+
+** 1.2 变量初始化
+
+使用Python变量前必须先给变量赋值, 因为Python变量没有初始值. 这有别于C/C++的不赋值可以运行, 但会有语义错误不同.
+
+** 1.3 常见函数
+
+*** input函数
+
+input函数以文本或字符串的格式返回. 因此如果我们需要使用输入其他类型的变量, 那我们需要对input的结果做一次强制类型转换, 从而获得不同类型的输入.
+
+*** 内置函数
+
+abs计算绝对值; 
+
+round将浮点数圆整为与之最为接近的整数，并在两个整数一样近的时候优先圆整到偶数, 这与前面提过的整除运算不同; 
+
+同时乘方运算我们也可以用内置函数pow(m,n)来实现,表示为m的n次方.
+
+*** 利用import导入模块
+
+ceil函数指返回大于或等于给定数的最小整数. 
+
+floor函数指返回小于或等于给定数的最大整数.
+
+但上面的函数并非内置函数, 需要导入模块来使用函数. 这里需要用import math指令来导入数学模块
+
+*** 利用import导入特定函数
+
+上面提到的import导入模块,使用函数时需要module.function才可以使用. 因此我们可以用import的变种from module import function
+来导入特定函数, 这一指令可以在调用函数时不指定模块前缀.
+
+但这一指令要求不会出现导入同名函数的情况
+
+*** 复数在Python的实现
+
+Python中没有专门表示虚数的数据类型, 因此会将虚数认定为实部为0的复数.
+** 1.4 字符串的简单知识
+
+*** 拼接字符串
+
+#+begin_src python
+print("Let's say" '"Hello,world!"')
+Let\'s say "Hello,world!"
+#+end_src
+
+上述出现的拼接仅限于同时依次输入两个字符串的时候.
+
+这一用法主要是用于处理一句话中既带有双引号, 又带有单引号的情况. 当然, 处理这种情况也可以用转义字符来解决.
+
+此处提及的拼接方法并非通用做法. 他必须要求输入的时候依次输入, 通用的做法是利用加号来连接字符串.
+
+#+begin_src python
+  x = "Hello, "
+  y = "world!"
+  print(x + y)
+Result:
+  'Hello, world!'
+#+end_src
+
+*** 长字符串和原始字符串
+
+长字符串和原始字符串的优点在于其可以在字符串中表示换行符或反斜杠.
+**** 长字符串
+
+长字符串用三引号括起来, 可以表示很长的字符串(跨越多行的字符串)
+
+#+begin_src python
+print('''This is a very long string. It continues here.
+... And it's not yet. "Hello, world!"
+... Still here.''')
+This is a very long string. It continues here.
+And it's not yet. "Hello, world!"
+Still here.
+#+end_src
+
+在长字符串中可以同时包含单引号和双引号, 并不需要使用反斜杠进行转义.
+
+常规字符串也可以横跨多行, 只需要在行尾加上反斜杠, 那么反斜杠和转行符会进行转义, 即被忽略. 这也同样适用于表达式和语句之中.
+
+#+begin_src python
+  print('This is a very long string. It continues here.\
+  ... "Hello world"')
+  This is a very long string. It continues here."Hello world"
+  print( 1 + 2 + \
+  ... 4 + 5)
+  12
+  print \
+  ... ('Hello, world')
+  Hello, world
+#+end_src
+
+**** 原始字符串
+
+原始字符串是在常规字符串前用前缀r引导.
+
+原始字符串与其他字符串类型不同, 他并不会对反斜杠进行转义处理, 而是将其完整输出.
+
+我们在常规字符串其实也可以做到, 但我们需要用转义反斜杠来表示反斜杠, 这在长字符串输入时十分麻烦
+
+#+begin_src python
+print('C:\\nowhere')
+C:\nowhere
+print(r'C:\nowhere')
+C:\nowhere
+#+end_src
+
+但是, 原始字符串不能以单个反斜杠结尾. 也就是原始字符串的最后一个字符不能是反斜杠, 除非你用的是转义反斜杠. 因为如果最后一个字符是反斜杠, 且并非转义的反斜杠, 那无法判断字符串是否已经结束.
+
+如果一定要这样输入, 那么可以用前面介绍的字符串拼接方法
+
+#+begin_src python
+print(r'C:\Program Files\foo\bar' '\\')
+C:\Program Files\foo\bar\ 
+#+end_src
+
+我们在定义原始字符串时, 不仅可以像常规字符串一样用单引号或者双引号括起, 我们还可以用三引号括起.
+* Chapter 2 列表和元组
+
+

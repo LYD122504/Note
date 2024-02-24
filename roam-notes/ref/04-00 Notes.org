@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       051f7494-a4db-4bcf-870b-05c0ef07e598
+:END:
+#+title: 04-00 Notes
+#+SETUPFILE: ../latex-preamble.org
+#+FILETAGS: reading research 
+ - tags ::  
+1. [[id:015a562f-a03b-4665-9566-c315b7884f35][04-01 Deep Learning]]
+   
+2. 04-02 Phase Field Model
+   
+3. 04-03 Navior Stokes equation
+   
+4. 04-04 Tumor growth model
+
+5. 04-05 Bose-Einstein condenstates
+
+6. 04-06 Invariant-Domain Preserving

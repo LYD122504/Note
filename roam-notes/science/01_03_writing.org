@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       2f708583-42ad-4427-8755-cfd6ef2b7278
+:END:
+#+title: 01-03 Writing
+#+SETUPFILE:  ../00-latex-preamble.org
+#+OPTIONS: tex:imagemagick
+#+FILETAGS: Science Research
+ - tag ::
+ - [[id:12fa979c-a19e-433f-b056-4c49d624cb9e][Science Research Writing]]

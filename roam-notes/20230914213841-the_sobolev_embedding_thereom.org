@@ -1,9 +1,0 @@
-:PROPERTIES:
-:ID:       41a29bce-76a9-4342-94df-2cb7cfd5c065
-:END:
-#+title: the Sobolev embedding thereom  
-- tag :: 
-#+DOWNLOADED: screenshot @ 2023-09-14 21:39:08
-[[file:img/2023-09-14_21-39-08_screenshot.png]]
-
-This special case of the Sobolev embedding is a direct consequence of the [[id:cc6667ed-cf96-4c22-a384-db6bdb9fcb6e][Gagliardo–Nirenberg–Sobolev inequality]].

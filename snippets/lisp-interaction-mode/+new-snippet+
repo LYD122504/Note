@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: html_centered
+# key: <hc
+# --
+{{{begin_centered_contents}}}
+$0	
+{{{end_centered_contents}}}

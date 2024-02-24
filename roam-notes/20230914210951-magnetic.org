@@ -1,7 +1,0 @@
-:PROPERTIES:
-:ID:       ac6a64c9-8426-4931-8e0b-f708ab026d48
-:END:
-#+title: Magnetic  
-- tag :: [[id:d6da447d-c1ec-4d55-9bc9-347b4b4bd4c8][Research article]]
-Gao 2014
-[[id:d30cf069-0ff3-4544-83e3-6fc450f0ed75][OPTIMAL ERROR ESTIMATES OF A LINEARIZED BACKWARD EULER FEM FOR THE LANDAU–LIFSHITZ EQUATION"]]

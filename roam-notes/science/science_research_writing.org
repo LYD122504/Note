@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       12fa979c-a19e-433f-b056-4c49d624cb9e
+:END:
+#+title: Science Research Writing
+#+SETUPFILE:  ../00-latex-preamble.org
+#+OPTIONS: tex:imagemagick
+#+FILETAGS: Science Research
+- tags ::

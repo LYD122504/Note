@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       0d3f3e11-c31d-480d-96fe-ea251df45885
+:END:
+#+title: High order numerical methods and algorithms
+#+SETUPFILE:  ../00-latex-preamble.org
+#+OPTIONS: tex:imagemagick
+#+FILETAGS: Science Research
+ - tag ::

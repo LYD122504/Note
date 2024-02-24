@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       e9ea8061-5abc-46f4-bec4-f9091e2b7c6c
+:END:
+#+title: POD
+#+SETUPFILE:  ../00-latex-preamble.org
+#+FILETAGS: Research Tips

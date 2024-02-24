@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       995f1914-26aa-421c-8fea-79492dbfd101
+:END:
+#+title: 02-00 Computer-Science
+#+SETUPFILE:  ../00-latex-preamble.org
+#+FILETAGS: computer
+  - [[id:91afcba9-8a93-4786-826b-94d6d405b813][02-01 Basic Code]]
+
+  - [[id:37c05de8-9388-41ef-a7b7-f962d33149b7][02-02 Professional Exam]]
+
+  - [[id:6c503e1a-fc2a-4de9-a28f-95ed4f6eb710][02-03 Emacs]]

@@ -1,0 +1,157 @@
+:PROPERTIES:
+:ID:       830df24c-8783-4e49-b8de-7b4d938a76c9
+:END:
+#+title: Emacs Tutorial
+#+SETUPFILE:  ../00-latex-preamble.org
+#+OPTIONS: tex:imagemagick
+#+FILETAGS: computer
+#+MACRO: begin_centered_contents @@html:<div align="center">@@
+#+MACRO: end_centered_contents @@html:</div>@@
+- tag :: [[id:6c503e1a-fc2a-4de9-a28f-95ed4f6eb710][02-03 Emacs]]
+* 常用的缩写
+我们用 C-<chr> 来表示按住 Ctrl 键同时按相应的字母操作, M-<chr> 则表示按住 ALT 键同时按相应的字母操作.
+
+我们先给出一些重要的快捷键指令:
+
+{{{begin_centered_contents}}}
+| Keybindings | Description                                |
+|-------------+--------------------------------------------|
+| /           | <                                          |
+| C-x C-c     | End the Emacs session                      |
+|-------------+--------------------------------------------|
+| C-g         | quit a partially entered command           |
+|-------------+--------------------------------------------|
+| C-x k       | Kill(close) a buffer chosen in minibuffer. |
+{{{end_centered_contents}}}
+
+* 光标移动操作
+** 屏幕层级的大范围移动
+{{{begin_centered_contents}}}
+| Keybindings | Description                                                   |
+| /           | <                                                             |
+|-------------+---------------------------------------------------------------|
+| C-v         | Move forward one screenful                                    |
+|-------------+---------------------------------------------------------------|
+| M-v         | Move backward one screenful                                   |
+|-------------+---------------------------------------------------------------|
+| C-l         | Move the text around the cursor to the center of the screen   |
+{{{end_centered_contents}}}
+** 基础光标控制
+1) Emacs 光标上下左右的操作可以用 C-n/p/f/b 来控制, 其优点在于移动光标的时候, 手不需要离开主键盘.
+2) 上下左右的快捷键可以用单词的形式记忆, 如n=next, p=previous, f=forward, b-backward.
+3) C-p/C-n的上下移动会保持光标在句中的相对位置, 除非是长度过短导致无法保持, 才会出现在句末.
+4) 当光标在单词中间的时候, 用 M-f 会将光标移动到单词的末尾; 如果是在单词之间的空格, 那么 M-f 可以跳转到下一个单词的末尾. M-b则是相反即可.
+5) ALT键关联的光标移动快捷键更多和语言的组成部分相关, 如单词, 句子, 段落. 反之, Ctrl 键对应的光标移动快捷键相关联的则是你编辑的模块, 如字母和行等等.
+6) 重复的 C-a 并不会多次生效, 其实是生效但是光标重叠. 而重复的 M-a 则可以不断回退到上一个句子.
+{{{begin_centered_contents}}}
+| Keybindings | Description                    |
+|-------------+--------------------------------|
+| /           | <                              |
+| C-n         | Move to next line              |
+|-------------+--------------------------------|
+| C-p         | Move to previous line          |
+|-------------+--------------------------------|
+| C-b         | Move backward a character      |
+|-------------+--------------------------------|
+| C-f         | Move forward a character       |
+|-------------+--------------------------------|
+| M-b         | Move backward a word           |
+|-------------+--------------------------------|
+| M-f         | Move forward a word            |
+|-------------+--------------------------------|
+| C-a         | Move to beginning of line      |
+|-------------+--------------------------------|
+| C-e         | Move to end of line            |
+|-------------+--------------------------------|
+| M-a         | Move back to beginning of line |
+|-------------+--------------------------------|
+| M-e         | Move forward to end of line    |
+|-------------+--------------------------------|
+{{{end_centered_contents}}}
+** 进阶的移动指令
+1) 大部分 Emacs 的指令是可以接受数字参数的. 对于大部分命令而言, 这一数字参数的作用一般是指定命令重复使用次数
+2) 添加数字参数的方法一般是用 C-u 然后输入数字参数, 最后输入你想重复使用的命令. 其中输入的 C-u 一般称之为前缀参数.
+3) 我们也可以用 M-数字参数来取代输入 C-u 数字参数的形式, 但更推荐使用 C-u 的形式, 因为它的使用范围更为广泛.
+4) 有些命令如果加了前缀参数, 那么不一定是重复, 而可能会改变命令的功能, 无论输入的数字参数的值是多少.
+   如 C-v/M-v 在给定数字参数的情况下, 他们将滚动指定的行数, 而不是屏数. 例如 C-u 8 C-v 是将文本向下滚动8行.
+{{{begin_centered_contents}}}
+| Keybindings | Description                   |
+|-------------+-------------------------------|
+| /           | <                             |
+| M-<         | Move to the beginning of text |
+|-------------+-------------------------------|
+| M->         | Move to the end of text       |
+{{{end_centered_contents}}}
+* 如果 Emacs 失去响应
+1) 如果 Emacs 对你的命令失去相应, 你可以用 C-g 来中止命令. 如果 Emacs 执行命令时间过长, 你也可以用 C-g 来中止.
+2) C-g 也可以中止带有数字参数或输入到一半的命令
+3) 如果你意外输入了 ESC 键, 你也可以用 C-g 中止. *(但实际上, 这样的中止只是因为我们没有定义指令 C-M-g. 因此更为安全的方法则是连续输入两次 ESC 键来取消)*
+* 窗口管理
+{{{begin_centered_contents}}}
+| Keybindings | Description                                                        |
+|-------------+--------------------------------------------------------------------|
+| /           | <                                                               |
+| C-x 1       | One window (i.e., kill all other windows                           |
+|-------------+------------------------------------------------------------------|
+| C-x 2       | Spilt the selected window into two windows, one above the other    |
+|             | (Split-window-below)                                               |
+|-------------+------------------------------------------------------------------|
+| C-x 3       | Spilt the selected window into two windows, positioned side by side |
+|             | (Split-window-right)                                               |
+
+{{{end_centered_contents}}}
+* 插入与删除操作
+1) 对于 Emacs 的插入操作我们只需要敲击键盘即可, 输入换行符, 则敲击 Enter 键即可.
+2) 我们可以用 Backspace 键来删除光标左边的字符, 同时光标左移. 而 Delete 则是删除光标对应的字符, 同时右边的字符向左移动
+3) 如果一行文字过长超过了窗口长度, 那么显示不下的部分则会自动换行, 并且会出现一个小小的转弯箭头, 表示接连显示.
+4) 与前文类似, 我们可以用 C-u+数字参数的前缀指令来重复输入字符. 如 C-u 8 *会输出八个 *
+5) Kill 和 Delete 的不同在于被 kill 的东西是可以重新撤销删除命令, 重新召回 Kill 的内容即 Yank.
+6) 单独的 C-k 会移除一行的内容, 第二个 C-k 会移除句末的换行符, 同时使后续行均向上移动. 而如果我们使用C-u 2 C-k命令, 则会移除两行连带他们的换行符.
+{{{begin_centered_contents}}}
+| Keybindings | Description                                  |
+|-------------+----------------------------------------------|
+| /           | <                                            |
+| Backspace   | Delete the character just before the cursor  |
+|-------------+----------------------------------------------|
+| C-d         | Delete the next character after the cursor   |
+|-------------+----------------------------------------------|
+| M-Backspace | Kill the word immwdiately before the cursor  |
+|-------------+----------------------------------------------|
+| M-d         | Kill the next word after the cursor          |
+|-------------+----------------------------------------------|
+| C-k         | Kill from the cursor position to end of line |
+|-------------+----------------------------------------------|
+| M-k         | Kill to the end of the current sentence      |
+|-------------+----------------------------------------------|
+| C-w         | Kill the whole region                        |
+|-------------+----------------------------------------------|
+| C-y         | Yank the more recent kill                    |
+|-------------+----------------------------------------------|
+| M-y         | Yank the earlier kill                        |
+{{{end_centered_contents}}}
+* 撤销操作
+1) 如果对文本进行修改操作, 可以通过撤销指令 C-/来撤销操作.
+2) 通常 C-/ 会消除一个命令所造成的所有改变; 如果多次使用 C-/, 则会使得以前的命令也被撤销
+3) 但有两种命令在撤销时和其他命令有所差异:
+   1. 不修改文本的命令不能被撤销(如光标移动和滚动操作).
+   2. 输入的字符一般以组为单位进行操作, 一组最多20个字符.
+4) 和C-/相同的指令还有 C-_ 和C-x u. 并且数字参数对撤销指令的作用是执行撤销的重复次数.
+* 文件操作
+1) C-x C-f 会呼出 minibuffer, 你需要在其中输入需要的文件, 同样你可以用 C-g 来取消输入.
+2) 第一次保存的时候 Emacs 会将原文件重命名以备份。重命名的规则通常是在原文件名之后添加一个“~”字符
+3) M-x customize-variable <Return> make-backup-files <Return> 可以关闭上述特性
+{{{begin_centered_contents}}}
+| Keybindings | Description   |
+|-------------+---------------|
+| /           | <             |
+| C-x C-f     | Find a file   |
+|-------------+---------------|
+| C-x C-s     | Save the file |
+|-------------+---------------|
+|             |               |
+{{{end_centered_contents}}}
+* 缓冲区
+
+* 
+* 
+* 

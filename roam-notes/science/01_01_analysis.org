@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       2bcec7fe-7fe2-46d8-b36d-6eafdd7cb22b
+:END:
+#+title: 01-01 Analysis
+#+SETUPFILE:  ../00-latex-preamble.org
+#+OPTIONS: tex:imagemagick
+#+FILETAGS: Science Research
+ - tag ::
+   - [[id:78682975-bf12-494a-ac2a-a641001bf511][Functional Analysis, Sobolev Spaces and Partial Differential Equations]]

@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       52c0760f-e739-4e91-96c4-4101cc26f1a1
+:END:
+#+title: 00 latex-preamble  
+- tag :: 
+ 个人知识库导航，分为三大板块
+ 1. 科研基础类 [[id:4e76dca1-24b3-4917-babf-d05d1a7a723a][01-00 Science-Basic]]
+
+ 2. 计算机类 [[id:995f1914-26aa-421c-8fea-79492dbfd101][02-00 Computer-Science]]
+    
+ 3. 外语学习类 03-00-English-Learning
+
+ 4. 论文笔记类 [[id:051f7494-a4db-4bcf-870b-05c0ef07e598][04-00 Notes]]
+
+ 5. 科研常用内容 [[id:6833e3c5-0428-493a-9296-ce9aa052f62e][05-00 Research Tips]]

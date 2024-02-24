@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       4758bb14-fca8-47b5-b0c5-26ee6956609b
+:END:
+#+title: 01-02 Numerical Methods
+#+SETUPFILE:  ../00-latex-preamble.org
+#+OPTIONS: tex:imagemagick
+#+FILETAGS: Science Research
+ - tag ::
+- Spectral Method
+  - [[id:0d3f3e11-c31d-480d-96fe-ea251df45885][High order numerical methods and algorithms]]

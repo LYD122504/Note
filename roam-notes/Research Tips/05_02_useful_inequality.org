@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       3c675147-488e-4956-8761-c56f5d7120aa
+:END:
+#+title: 05-02 Useful Inequality
+#+SETUPFILE:  ../00-latex-preamble.org
+#+FILETAGS: Research Tips

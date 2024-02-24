@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       d44bae23-d09d-4fe2-9134-fa338b451abe
-:END:
-#+title: Deep-Learning  
-- tag :: 
- 

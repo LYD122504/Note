@@ -1,9 +1,0 @@
-:PROPERTIES:
-:ID:       d6da447d-c1ec-4d55-9bc9-347b4b4bd4c8
-:END:
-#+title: Research article  
-- tag ::
-  [[id:ac6a64c9-8426-4931-8e0b-f708ab026d48][Magnetic]]
-  [[id:a8884d43-feb7-42e5-b714-ece36c49f442][Phase field]]
-  [[id:dab4e23b-ae63-4a77-a951-a2a9717f1d9d][Navior-Stokes]]
-  [[id:d44bae23-d09d-4fe2-9134-fa338b451abe][Deep-Learning]]
